@@ -4,6 +4,7 @@ import express from 'express';
 
 import clientesController from './src/controllers/clientes/clientesController.js';
 import produtosProdutos from './src/controllers/produtos/produtosProdutos.js';
+import enderecosCtrls from './src/controllers/endereco/enderecosCtrls.js';
 
 const server = express();
 server.use(cors());
@@ -22,3 +23,4 @@ server.get('/japodemossar',async (req, resp) =>{
 
 server.use(clientesController);
 server.use(produtosProdutos);
+server.use(enderecosCtrls);

@@ -5,14 +5,24 @@ import { InsertClientes, ListClientes } from "../../repositorys/clientes/cleinte
 let server = Router();
 
 server.get('/clientes', async (req, resp) => {
-    let data = await ListClientes();
-    resp.send(data)
+    try {
+        let data = await ListClientes();
+        resp.send(data)
+        
+    } catch (err) {
+        resp.send(err.message)
+    }
 });
 
 server.post('/clientes', async (req, resp) => {
+    try {
     let bodyReq = req.body
-    let data = await InsertClientes(body);
+    let data = await InsertClientes(bodyReq);
     resp.send(data)
+        
+    } catch (err) {
+        resp.send(err.message)
+    }
 });
 
 export default server
