@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { ListClientes } from "../../repositorys/clientes/cleintesRepository.js";
 
 
 let server = Router();

@@ -22,6 +22,8 @@ CREATE TABLE ENDERECOS_TB(
     NR_NUMERO			INT NOT NULL
 );
 
+
+
 						
 -- ------------------------ --
 -- ------------------------ --

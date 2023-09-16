@@ -2,7 +2,7 @@ import 'dotenv/config';
 import cors from "cors";
 import express from 'express';
 
-import clientesController from './src/controllers/clientes/clientesController.js';
+import usuarioController from './src/controllers/usuario/usuario.js';
 import produtosProdutos from './src/controllers/produtos/produtosProdutos.js';
 import enderecosCtrls from './src/controllers/endereco/enderecosCtrls.js';
 
@@ -15,12 +15,6 @@ server.listen(process.env.PORT,() => console.log(`
 `));
 
 
-server.get('/japodemossar',async (req, resp) =>{
-    let horario = Date()
-    resp.send('pode, pois são '+ horario)
-});
-
-
-server.use(clientesController);
+server.use(usuarioController);
 server.use(produtosProdutos);
 server.use(enderecosCtrls);
