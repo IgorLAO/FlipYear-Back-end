@@ -20,3 +20,13 @@ export async function InsertClientes(C) {
                                             C.Senha]);
     return resp
 };
+
+export async function Login(C) {
+    let sql = ` SELECT NM_CLIENTE    AS Nome
+                       DS_EMAIL      AS Email
+                FROM   CLIENTES_TB     
+                WHERE  DS_EMAIL      = ?
+                AND    DS_SENHA      = ?`
+    let [resp] = await config.query(sql, [C.Nome, C.Senha]);
+    return resp
+}
