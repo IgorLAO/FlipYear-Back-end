@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { InsertClientes, ListUsers, Login } from "../../repositorys/usuarios/usuariosRepo.js";
+import { InsertClientes, Login, getUsers } from "../../repositorys/usuarios/usuariosRepo.js";
 
 
 let server = Router();
 
 server.get('/usuario', async (req, resp) => {
     try {
-        let data = await ListUsers();
+        let data = await getUsers();
         resp.send(data)
 
     } catch (err) {
@@ -37,6 +37,8 @@ server.post('/usuario', async (req, resp) => {
         if (!bodyReq.Senha || bodyReq.length < 6)
             throw new Error("Digite uma Senha");
 
+            console.log(resp[0])
+
         let data = await InsertClientes(bodyReq);
         resp.send(data)
 
@@ -54,7 +56,7 @@ server.post('/usuario/login', async (req, resp) => {
 
         resp.send(data)
     } catch (err) {
-        resp.send({ erro: err.message })
+        resp.status(401).send({ erro: err.message })
     }
 });
 
