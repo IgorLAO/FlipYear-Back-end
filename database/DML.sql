@@ -3,10 +3,7 @@ USE FLIPYEARDB;
 
 -- PERFIL GERAL CLIENTS e ADM
 INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES (2, "rOGERIO SKYLAB", "55 (11) 396546432", 546546654, "rogerio@gmail.com", "USER_NORMAL#1", "NORMAL_USER"),
-							   (1, "James S. Frutã", "55 (69) 6666666", 4224234, "James.F@ADMIN.com", "ADM#1", "ADM"),
-							   (1, "Carlihos H. Janta", "55 (69) 696969", 69696969, "Carlihos.H_@ADMIN.com", "ADM#2", "ADM"),
-							   (2, "Paulo Kogos da Silva", "55 (69) 669669", 699696222, "Carlihos.H_@ADMIN.com", "USER_NORMAL#2", "NORMAL_USER");
+						VALUES (1, "Igor L. A ", "0", 0, "igorF@ADMIN.com", "ADM12345678", "ADM");
 							   
 		select *
 			from USERS_TB 			AS U_TB
@@ -20,6 +17,12 @@ INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  D
 			FROM    CLIENTES_TB     
 			WHERE   DS_EMAIL      = 'rogerio@gmail.com'
 			AND     DS_SENHA      = '123aa4';
+            
+            SELECT *
+                         FROM USERS_TB
+                WHERE NM_USUARIO  LIKE "%rogerio%" 
+                      OR DS_CPF   LIKE "%rogerio%"
+                      OR DS_EMAIL LIKE "%rogerio%";
 
 		-- ENDERECO
 			INSERT INTO ENDERECOS_TB (DS_CEP, NM_CIDADE, NM_RUA, DS_COMPLEMENTO, NR_NUMERO)
