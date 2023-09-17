@@ -1,26 +1,43 @@
 import config  from '../DB/db_connection.js';
 
-export async function InsertProdutos(produto){
+//export async function InsertProdutos(produto){
+//
+//    const resp = `
+//    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_DESTAQUE, BT_PRMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
+//       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?) `
+//
+//   const [linhas] = await config.query(resp[
+//      produto.categoria,
+//      produto.nome,
+//      produto.preco,
+//      produto.precoPromocao,
+//      produto.destaque,
+//      produto.promocao,
+//      produto.disponivel,
+//      produto.estoque,
+//      produto.detalhes
+//  ]);
+//
+//  produto.id = linhas.insertId
+//   return resp[0];  
+//}
 
-    const resp = `
-    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_PRMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
-        VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?) `
+export async function InsertProdutos(p){
+    let sql = `INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_DESTAQUE, BT_PRMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
+    VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?)`
 
-    const [linhas] = await config.query(resp[
+    let [resp] = await config.query(sql, [p.categoria,
+    p.nome,
+    p.preco,
+    p.precoPromocao,
+    p.destaque,
+    p.promocao,
+    p.disponivel,
+    p.estoque,
+    p.detalhes])
 
-        produto.categoria,
-        produto.nome,
-        produto.preco,
-        produto.precoPromocao,
-        produto.promocao,
-        produto.destaque,
-        produto.disponivel,
-        produto.estoque,
-        produto.detalhes
-    ]);
-
-    produto.id = linhas.insertId
-    return produto;  
+    p.id = resp.insertId;
+    return resp;
 }
 
 
@@ -30,7 +47,7 @@ export async function ConsultProd(busca){
 				FROM PRODUTO_TB 		AS P 
 			INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
         `
-    const [resp] = await config.query
+    const [resp] = await config.query(chamar)
     return resp
 }
 
