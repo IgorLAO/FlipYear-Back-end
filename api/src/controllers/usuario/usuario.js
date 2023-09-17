@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { Delete, InsertClientes, Login, SearchUser, getUsers } from "../../repositorys/usuarios/usuariosRepo.js";
 
-
 let server = Router();
 
 server.get('/usuarios', async (req, resp) => {
@@ -13,9 +12,6 @@ server.get('/usuarios', async (req, resp) => {
         resp.send(err.message)
     }   
 });
-
-
-
 
 server.post('/usuarios', async (req, resp) => {
     try {
@@ -98,4 +94,4 @@ server.delete('/usuario/:id', async (req, resp) => {
     }
 })
 
-export default server
+export default server;
