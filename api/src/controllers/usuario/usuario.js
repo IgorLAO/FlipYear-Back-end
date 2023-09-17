@@ -11,7 +11,7 @@ server.get('/usuario', async (req, resp) => {
 
     } catch (err) {
         resp.send(err.message)
-    }
+    }   
 });
 
 
