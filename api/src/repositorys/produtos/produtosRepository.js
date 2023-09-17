@@ -1,44 +1,28 @@
 import config  from '../DB/db_connection.js';
 
-//export async function InsertProdutos(produto){
-//
-//    const resp = `
-//    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_DESTAQUE, BT_PRMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
-//       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?) `
-//
-//   const [linhas] = await config.query(resp[
-//      produto.categoria,
-//      produto.nome,
-//      produto.preco,
-//      produto.precoPromocao,
-//      produto.destaque,
-//      produto.promocao,
-//      produto.disponivel,
-//      produto.estoque,
-//      produto.detalhes
-//  ]);
-//
-//  produto.id = linhas.insertId
-//   return resp[0];  
-//}
+export async function InsertProdutos(produto){
 
-export async function InsertProdutos(p){
-    let sql = `INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_DESTAQUE, BT_PRMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
-    VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?)`
+    const resp = `
+    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_DESTAQUE, BT_PRMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
+       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?) `
 
-    let [resp] = await config.query(sql, [p.categoria,
-    p.nome,
-    p.preco,
-    p.precoPromocao,
-    p.destaque,
-    p.promocao,
-    p.disponivel,
-    p.estoque,
-    p.detalhes])
+   const [linhas] = await config.query(resp, [
+      produto.categoria,
+      produto.nome,
+      produto.preco,
+      produto.precoPromocao,
+      produto.destaque,
+      produto.promocao,
+      produto.disponivel,
+      produto.estoque,
+      produto.detalhes
+  ]);
 
-    p.id = resp.insertId;
-    return resp;
+  produto.id = linhas.insertId
+   return resp[0];  
 }
+
+
 
 
 export async function ConsultProd(busca){
