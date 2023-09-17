@@ -16,7 +16,8 @@ server.get('/usuario', async (req, resp) => {
 
 
 
-server.post('/usuario', async (req, resp) => {
+
+server.post('/usuarios', async (req, resp) => {
     try {
         let bodyReq = req.body
         if (!bodyReq.Nome)
@@ -47,7 +48,7 @@ server.post('/usuario', async (req, resp) => {
     }
 });
 
-server.post('/usuario/login', async (req, resp) => {
+server.post('/usuarios/login', async (req, resp) => {
     try {
         let { Email, Senha } = req.body
         let data = await Login(Email, Senha)
@@ -59,5 +60,9 @@ server.post('/usuario/login', async (req, resp) => {
         resp.status(401).send({ erro: err.message })
     }
 });
+
+server.get('/usuario', async (req, resp) => {
+    
+})
 
 export default server

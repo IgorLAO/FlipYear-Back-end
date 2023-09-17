@@ -35,3 +35,14 @@ export async function Login(Email, Senha) {
     const [resp] = await config.query(sql, [Email, Senha]);
     return resp[0]
 }
+
+export async function SearchUser(search){
+    let sql = `SELECT *
+                         FROM USERS_TB
+                WHERE NM_USUARIO  LIKE ? 
+                      OR DS_CPF   LIKE ?
+                      OR DS_EMAIL LIKE?`
+    let [resp] = await config.query(sql, [`% ${search} % `,
+                                          `% ${search} % `,
+                                          `% ${search} % `])
+}
