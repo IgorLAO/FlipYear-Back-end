@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { InsertClientes, Login, getUsers } from "../../repositorys/usuarios/usuariosRepo.js";
+import { Delete, InsertClientes, Login, SearchUser, getUsers } from "../../repositorys/usuarios/usuariosRepo.js";
 
 
 let server = Router();
 
-server.get('/usuario', async (req, resp) => {
+server.get('/usuarios', async (req, resp) => {
     try {
         let data = await getUsers();
         resp.send(data)
@@ -20,6 +20,9 @@ server.get('/usuario', async (req, resp) => {
 server.post('/usuarios', async (req, resp) => {
     try {
         let bodyReq = req.body
+        let data = await InsertClientes(bodyReq);
+
+
         if (!bodyReq.Nome)
             throw new Error("O nome é obrigatorio");
 
@@ -28,6 +31,11 @@ server.post('/usuarios', async (req, resp) => {
 
         if (!bodyReq.CPF)
             throw new Error("O CPF é obrigatorio");
+
+        // let isCadastrado = await getUsers(bodyReq.CPF);
+        // console.log(isCadastrado)
+        // if(isCadastrado.length > 0)
+        //     throw new Error("Usuario já cadastrado");
 
         if (!bodyReq.Email)
             throw new Error("O Email é obrigatorio");
@@ -38,9 +46,6 @@ server.post('/usuarios', async (req, resp) => {
         if (!bodyReq.Senha || bodyReq.length < 6)
             throw new Error("Digite uma Senha");
 
-            console.log(resp[0])
-
-        let data = await InsertClientes(bodyReq);
         resp.send(data)
 
     } catch (err) {
@@ -61,8 +66,36 @@ server.post('/usuarios/login', async (req, resp) => {
     }
 });
 
-server.get('/usuario', async (req, resp) => {
-    
+server.get('/usuarios/busca', async (req, resp) => {
+    try {
+        let dataSearch = req.query.search;
+
+        console.log(dataSearch)
+        let res = await SearchUser(dataSearch);
+        console.log(dataSearch)
+
+        if (res === 0)
+            throw new Error("Não encontrado")
+
+        resp.send(res);
+    } catch (err) {
+        resp.status(404).send({ erro: err.message })
+    }
+})
+
+server.delete('/usuario/:id', async (req, resp) => {
+    try {
+        let id = req.params.id
+        let res = Delete(id);
+
+        if (resp === 0)
+            throw new Error("Não pode ser excluído")
+
+        resp.send(res);
+
+    } catch (err) {
+        resp.status(405).send({ erro: err.message })
+    }
 })
 
 export default server
