@@ -19,8 +19,8 @@ export async function InsertProdutos(produto){
         produto.detalhes
     ]);
 
-    produto.id = linhas.insertId
-    return produto;  
+  
+    return linhas.affectedRows;  
 }
 
 
