@@ -26,7 +26,7 @@ export async function InsertProdutos(produto){
 export async function RemoverProdutos(id){
     const comando = `
     
-    DELETE FROM TB_PRODUTO
+    DELETE FROM PRODUTO_TB
         WHERE ID_PRODUTO = ? `
 
     const [resp] = await config.query(comando, [id]);
