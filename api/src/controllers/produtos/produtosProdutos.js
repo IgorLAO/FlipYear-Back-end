@@ -84,7 +84,7 @@ server.delete('/produtos/:id', async (req, resp) => {
         if(produto != 1)
             throw new Error("Produto não pode ser removido")
         
-            resp.status(204).send
+            resp.send(204)
     } catch (err) {
         resp.status(400).send({
             erro: err.message
