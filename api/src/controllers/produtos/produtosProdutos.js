@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AlterarProduto, ConsultProd, InsertProdutos } from "../../repositorys/produtos/produtosRepository.js";
+import { AlterarProduto, ConsultProd, InsertProdutos, RemoverProdutos } from "../../repositorys/produtos/produtosRepository.js";
 
 let server = Router();
 
@@ -8,7 +8,6 @@ server.post('/produtos', async (req, resp) => {
     try {
         const produtos = req.body
 
-        
         if(!produtos.nome){
             throw new Error("Informe o nome")
         }
@@ -75,9 +74,21 @@ server.put('/produtos/:id', async (req, resp) => {
     }
 });
 
-
-
+//remover
 server.delete('/produtos/:id', async (req, resp) => {
-    
+    try {
+        const { id } = req.params;
+
+        const produto = await RemoverProdutos(id);
+
+        if(produto != 1)
+            throw new Error("Produto não pode ser removido")
+        
+            resp.status(204).send
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
 })
 export default server;

@@ -23,6 +23,15 @@ export async function InsertProdutos(produto){
 }
 
 
+export async function RemoverProdutos(id){
+    const comando = `
+    
+    DELETE FROM TB_PRODUTO
+        WHERE ID_PRODUTO = ? `
+
+    const [resp] = await config.query(comando, [id]);
+    return resp.affectedRows; 
+}
 
 
 export async function ConsultProd(busca){
@@ -59,5 +68,7 @@ export async function AlterarProduto(id, produto){
         produto.detalhes,
         id
     ]);
+
     return resp.affectedRows;   
 }
+
