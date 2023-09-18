@@ -3,7 +3,7 @@ USE FLIPYEARDB;
 
 -- PERFIL GERAL CLIENTS e ADM
 INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES (1, "Igor L. A ", "0", 0, "igorF@ADMIN.com", "ADM12345678", "ADM");
+						VALUES (1, "carlinhos", "0", 0, "igor@gmail.com", "12345678", "NORMAL_USER");
 							   
 		select *
 			from USERS_TB 			AS U_TB
