@@ -1,7 +1,7 @@
 import config from "../DB/db_connection.js";
 
 export async function getUsers(Tier) {
-    let sql = `	SELECT  ID_USUARIO      AS      id,
+    let sql = `	SELECT  ID_CLIENTE      AS      id,
                         NM_USUARIO      AS      Nome,
                         DS_EMAIL        AS      Email,
                         DS_TELEFONE     AS      Telefone,
@@ -18,7 +18,8 @@ export async function getUsers(Tier) {
 
 export async function InsertClientes(C) {
     let sql = `INSERT INTO USERS_TB  (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-                                        VALUES (?, ?, ?, ?, ?, ?, ?)`;
+                                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
+                                     
     let [resp] = await config.query(sql, [ C.id_endereco, 
                                            C.Nome, 
                                            C.Telefone, 
@@ -31,13 +32,15 @@ export async function InsertClientes(C) {
 };
 
 export async function Login(Email, Senha) {
-    let sql = ` SELECT ID_USUARIO,
-                       NM_USUARIO    AS Nome,
-                       DS_EMAIL      AS Email,
-                       DS_TIER       AS Tier   
-                FROM   USERS_TB     
-                WHERE  DS_EMAIL      = ?
-                AND    DS_SENHA      = ?`;
+    let sql = ` select  ID_CLIENTE	 AS Id,
+                        NM_USUARIO	 AS Nome,
+                        DS_EMAIL	 AS Email,
+                        DS_TIER      AS Tier
+    from USERS_TB 		             AS U_TB
+        INNER JOIN ENDERECOS_TB      AS E_TB 
+                                     ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
+                            WHERE   DS_EMAIL = ?
+                            AND     DS_SENHA = ?`;
 
     const [resp] = await config.query(sql, [Email, Senha]);
     return resp[0]
@@ -51,11 +54,11 @@ export async function SearchUser(search){
                       OR DS_EMAIL LIKE ?`
     let [resp] = await config.query(sql, [  '%' + search + '%',
                                             '%' + search + '%',
-                                            '%' + search + '%'])
-    console.log(resp)
+                                            '%' + search + '%']);
+    console.log(resp);
     
     return resp
-}
+};
 
 export async function Delete(id){
     let sql = `DELETE FROM USERS_TB
@@ -63,4 +66,4 @@ export async function Delete(id){
     let [resp] = await config.query(sql, [ id])
     
     return resp.affectedRows
-}
+};

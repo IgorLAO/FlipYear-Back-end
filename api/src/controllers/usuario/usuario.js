@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Delete, InsertClientes, Login, SearchUser, getUsers } from "../../repositorys/usuarios/usuariosRepo.js";
+import { getADM } from "../../repositorys/ADM.js";
 
 let server = Router();
 
@@ -13,11 +14,20 @@ server.get('/usuarios', async (req, resp) => {
     }   
 });
 
+server.get('/adms', async (req, resp) => {
+    try {
+        let data = await getADM();
+        resp.send(data)
+
+    } catch (err) {
+        resp.send(err.message)
+    }   
+});
+
 server.post('/usuarios', async (req, resp) => {
     try {
         let bodyReq = req.body
         let data = await InsertClientes(bodyReq);
-
 
         if (!bodyReq.Nome)
             throw new Error("O nome é obrigatorio");
