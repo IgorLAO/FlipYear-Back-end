@@ -3,7 +3,7 @@ USE FLIPYEARDB;
 
 -- PERFIL CLIENTES 
 INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES (1, "joana", "0", 0, "joana@gmail.com", "12345678", 'NORMAL_USERS');
+						VALUES (1, "joana", "0", "0" , "joana@gmail.com", "12345678", 'NORMAL_USERS');
 							   
 		select  ID_CLIENTE			AS Id,
 			 	NM_USUARIO			AS Nome,
