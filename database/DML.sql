@@ -3,11 +3,13 @@ USE FLIPYEARDB;
 
 -- PERFIL CLIENTES 
 INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES (1, "joana", "0", 0, "joana@gmail.com", "12345678", 'NORMAL_USERS');
+						VALUES (1, "teste", "0", 0, "teste", "123", 'NORMAL_USERS');
 							   
 		select  ID_CLIENTE			AS Id,
 			 	NM_USUARIO			AS Nome,
-                DS_EMAIL			AS Email
+                DS_EMAIL			AS Email,
+                DS_SENHA,
+                ds_tier
 			from users_tb 			AS U_TB
 			INNER JOIN ENDERECOS_TB AS E_TB 
 									ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO;

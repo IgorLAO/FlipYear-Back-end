@@ -45,7 +45,7 @@ server.get('/produtos', async (req, resp) => {
     }
 })
 
-//editar
+//alterar
 server.put('/produtos/:id', async (req, resp) => {
     try {
         const { id } =  req.params;
