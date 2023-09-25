@@ -7,14 +7,14 @@ INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  D
 
 
 							   
-		select  ID_CLIENTE			AS Id,
+		select  ID_USUARIO			AS Id,
 			 	NM_USUARIO			AS Nome,
                 DS_EMAIL			AS Email
-			from users_tb 			AS U_TB
+			from USERS_TB			AS U_TB
 			INNER JOIN ENDERECOS_TB AS E_TB 
 									ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO;
 
-			SELECT 	ID_CLIENTE,
+			SELECT 	ID_USUARIO,
 					NM_USUARIO    AS Nome,
 					DS_EMAIL      AS Email
 			FROM    USERS_TB     
