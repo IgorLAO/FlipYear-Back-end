@@ -10,7 +10,7 @@ export async function getUsers(Tier) {
                         NM_RUA          AS      Nome_Rua,
                         NR_NUMERO       AS      Numero  
                       FROM USERS_TB	    AS C_TB
-                INNER JOIN ENDERECOS_TB AS E_TB 
+                INNER JOIN ENDERECO_TB AS E_TB 
                                         ON E_TB.ID_ENDERECO= C_TB.ID_ENDERECO`;
     let [resp] = await config.query(sql)
     return resp
@@ -37,7 +37,7 @@ export async function Login(Email, Senha) {
                         DS_EMAIL	 AS Email,
                         DS_TIER      AS Tier
     from USERS_TB 		             AS U_TB
-        INNER JOIN ENDERECOS_TB      AS E_TB 
+        INNER JOIN ENDERECO_TB      AS E_TB 
                                      ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
                             WHERE   DS_EMAIL = ?
                             AND     DS_SENHA = ?`;
