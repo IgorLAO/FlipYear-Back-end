@@ -1,7 +1,7 @@
 import config from "../DB/db_connection.js";
 
 export async function getUsers(Tier) {
-    let sql = `	SELECT  ID_USUARIO      AS      Id_endereco,
+    let sql = `	SELECT  ID_USUARIO      AS      id,
                         NM_USUARIO      AS      Nome,
                         DS_EMAIL        AS      Email,
                         DS_TELEFONE     AS      Telefone,
@@ -10,7 +10,7 @@ export async function getUsers(Tier) {
                         NM_RUA          AS      Nome_Rua,
                         NR_NUMERO       AS      Numero  
                       FROM USERS_TB	    AS C_TB
-                INNER JOIN ENDERECOS_TB AS E_TB 
+                INNER JOIN ENDERECO_TB AS E_TB 
                                         ON E_TB.ID_ENDERECO= C_TB.ID_ENDERECO`;
     let [resp] = await config.query(sql)
     return resp
@@ -32,12 +32,12 @@ export async function InsertClientes(C) {
 };
 
 export async function Login(Email, Senha) {
-    let sql = ` select  ID_USUARIO	 AS Id_endereco,
+    let sql = ` select  ID_USUARIO	 AS id,
                         NM_USUARIO	 AS Nome,
                         DS_EMAIL	 AS Email,
                         DS_TIER      AS Tier
     from USERS_TB 		             AS U_TB
-        INNER JOIN ENDERECOS_TB      AS E_TB 
+        INNER JOIN ENDERECO_TB      AS E_TB 
                                      ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
                             WHERE   DS_EMAIL = ?
                             AND     DS_SENHA = ?`;
