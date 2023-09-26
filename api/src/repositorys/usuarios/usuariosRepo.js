@@ -1,7 +1,7 @@
 import config from "../DB/db_connection.js";
 
 export async function getUsers(Tier) {
-    let sql = `	SELECT  ID_USUARIO      AS      Id,
+    let sql = `	SELECT  ID_USUARIO      AS      Id_endereco,
                         NM_USUARIO      AS      Nome,
                         DS_EMAIL        AS      Email,
                         DS_TELEFONE     AS      Telefone,
@@ -32,7 +32,7 @@ export async function InsertClientes(C) {
 };
 
 export async function Login(Email, Senha) {
-    let sql = ` select  ID_USUARIO	 AS Id,
+    let sql = ` select  ID_USUARIO	 AS Id_endereco,
                         NM_USUARIO	 AS Nome,
                         DS_EMAIL	 AS Email,
                         DS_TIER      AS Tier
