@@ -1,7 +1,7 @@
 import config from "../DB/db_connection.js";
 
 export async function getUsers(Tier) {
-    let sql = `	SELECT  ID_CLIENTE      AS      id,
+    let sql = `	SELECT  ID_USUARIO      AS      Id_endereco,
                         NM_USUARIO      AS      Nome,
                         DS_EMAIL        AS      Email,
                         DS_TELEFONE     AS      Telefone,
@@ -20,7 +20,7 @@ export async function InsertClientes(C) {
     let sql = `INSERT INTO USERS_TB  (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
                                      VALUES (?, ?, ?, ?, ?, ?, ?)`;
                                      
-    let [resp] = await config.query(sql, [ C.id_endereco, 
+    let [resp] = await config.query(sql, [ C.Id_endereco, 
                                            C.Nome, 
                                            C.Telefone, 
                                            C.CPF, 
@@ -32,7 +32,7 @@ export async function InsertClientes(C) {
 };
 
 export async function Login(Email, Senha) {
-    let sql = ` select  ID_CLIENTE	 AS Id,
+    let sql = ` select  ID_USUARIO	 AS Id_endereco,
                         NM_USUARIO	 AS Nome,
                         DS_EMAIL	 AS Email,
                         DS_TIER      AS Tier
