@@ -3,7 +3,7 @@ import cors from "cors";
 import express from 'express';
 
 import usuarioController from './src/controllers/usuario/usuario.js';
-import produtosProdutos from './src/controllers/produtos/produtosProdutos.js';
+import produtosCtrl from './src/controllers/produtos/produtosCtrl.js';
 import enderecosCtrls from './src/controllers/endereco/enderecosCtrls.js';
 
 const server = express();
@@ -16,5 +16,5 @@ server.listen(process.env.PORT,() => console.log(`
 
 
 server.use(usuarioController);
-server.use(produtosProdutos);
+server.use(produtosCtrl);
 server.use(enderecosCtrls);
