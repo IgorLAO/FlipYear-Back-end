@@ -1,9 +1,9 @@
 import config from '../DB/db_connection.js';
 
 export async function ListProd() {
-    const sql = `SELECT *
-                    FROM PRODUTO_TB 		AS P 
-                    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA`;
+    const sql = `SELECT	*
+                FROM PRODUTO_TB 		    AS P 
+                INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA`;
     let [resp] = await config.query(sql)
     return resp
 }
