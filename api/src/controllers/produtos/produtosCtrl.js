@@ -33,6 +33,7 @@ server.post('/produtos', async (req, resp) => {
         }
         if (!produtos.disponivel) {
             throw new Error("Informe se o produto está disponível");
+            
         }
         if (!produtos.destaque) {
             throw new Error("Informe se é destaque")
