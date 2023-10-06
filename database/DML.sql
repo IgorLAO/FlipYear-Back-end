@@ -10,8 +10,8 @@ INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_E
                                 (2, 1, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
                                 (2, 1, "David", "0", 0, "david.admin", "123", 'ADM');
                                 
-INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
-							VALUES('2', 'BBBB');
+INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)
+							VALUES('https://dummyimage.com/640x360/fff/aaa', 'https://dummyimage.com/640x360/fff/aaa');
                                
                                
 		select  ID_USUARIO			AS Id,
