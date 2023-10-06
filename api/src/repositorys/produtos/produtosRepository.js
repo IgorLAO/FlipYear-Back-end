@@ -1,10 +1,13 @@
 import config from '../DB/db_connection.js';
 
-export async function ListProd() {
+export async function ListProd(qtd, offset) {
     const sql = `SELECT	*
-                FROM PRODUTO_TB 		    AS P 
-                INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA`;
-    let [resp] = await config.query(sql)
+                  FROM PRODUTO_TB 		    AS P 
+            INNER JOIN CATEGORIA_TB		    AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+                 ORDER BY nm_produto
+                 LIMIT ?
+                OFFSET ? `;
+    let [resp] = await config.query(sql, [qtd, offset])
     return resp
 }
 

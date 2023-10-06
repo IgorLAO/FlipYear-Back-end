@@ -5,10 +5,23 @@ let server = Router();
 //LISTAR
 server.get('/produtos', async (req, resp) => {
     try {
-        const getData = await ListProd();
+        const qtd = 4;
+        const pag = req.query.pagina;
+        const offset = (pag-1) * qtd;
+
+        const getData = await ListProd(qtd, offset);
         if(getData.length <= 0)
             throw new Error('Não encontrado')
         resp.send(getData);
+
+        /*
+            {
+                qtd: 4,
+                pag: 1,
+                total: 7,
+                resultad: [{},{}]
+            }
+        */
 
     } catch (err) {
         resp.status(404).send({erro: err.message})

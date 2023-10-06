@@ -3,9 +3,17 @@ USE Flipyear2000_DB;
 
 -- PERFIL CLIENTES 
 INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES (1, "joana", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
-								(2, "FAISKA MASSACRE", "0", 0, "ADM", "123", 'ADM');
-							   
+						VALUES (1, 2, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
+								(2, 1, "JOAO", "0", 0, "joao.admin", "123", 'ADM'),
+                                (2, 1, "Igor", "0", 0, "igor.admin", "123", 'ADM'),
+                                (2, 1, "Italo", "0", 0, "italo.admin", "123", 'ADM'),
+                                (2, 1, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
+                                (2, 1, "David", "0", 0, "david.admin", "123", 'ADM');
+                                
+INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
+							VALUES('2', 'BBBB');
+                               
+                               
 		select  ID_USUARIO			AS Id,
 			 	NM_USUARIO			AS Nome,
                 DS_EMAIL			AS Email
@@ -34,7 +42,7 @@ INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_E
 											("341343978", "Beverly hills", " Rua Gigachad da silva "," CASA QUE FICA PERTO DE UMA CALÇADA", 123);
 									 
 		-- PRODUTOS
-			INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_PRMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
+			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_PRMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
 									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira");
 									
 			INSERT INTO CATEGORIA_TB (NM_CATEGORIA)
