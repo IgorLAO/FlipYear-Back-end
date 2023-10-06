@@ -14,12 +14,12 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)
 							VALUES('https://dummyimage.com/640x360/fff/aaa', 'https://dummyimage.com/640x360/fff/aaa');
                                
                                
-		select  ID_USUARIO			AS Id,
-			 	NM_USUARIO			AS Nome,
-                DS_EMAIL			AS Email
-			from USERS_TB			AS U_TB
-			INNER JOIN ENDERECO_TB AS E_TB 
-									ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO;
+		select  *
+			from USERS_TB					AS U_TB
+				INNER JOIN ENDERECO_TB 		AS E_TB 
+											ON E_TB.ID_ENDERECO = U_TB.ID_ENDERECO
+			INNER JOIN IMAGES_PERFIL_USER 	AS I_TB
+											ON I_TB.ID_IMG = U_TB.ID_IMG;
 
 			SELECT 	ID_USUARIO,
 					NM_USUARIO    AS Nome,
