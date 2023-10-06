@@ -20,7 +20,7 @@ export async function InsertClientes(C) {
     let sql = `INSERT INTO USERS_TB  (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
                                      VALUES (?, ?, ?, ?, ?, ?, ?)`;
                                      
-    let [resp] = await config.query(sql, [ C.Id_endereco, 
+    let [resp] = await config.query(sql,  [C.Id_endereco, 
                                            C.Nome, 
                                            C.Telefone, 
                                            C.CPF, 
@@ -32,15 +32,16 @@ export async function InsertClientes(C) {
 };
 
 export async function Login(Email, Senha) {
-    let sql = ` select  ID_USUARIO	 AS Id,
+    let sql = ` SELECT  ID_USUARIO	 AS Id,
                         NM_USUARIO	 AS Nome,
                         DS_EMAIL	 AS Email,
-                        DS_TIER      AS Tier
+                        DS_TIER      AS Tier,
+                        ID_IMG       AS img_perfil
     from USERS_TB 		             AS U_TB
-        INNER JOIN ENDERECO_TB      AS E_TB 
+        INNER JOIN ENDERECO_TB       AS E_TB 
                                      ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
-                            WHERE   DS_EMAIL = ?
-                            AND     DS_SENHA = ?`;
+                            WHERE DS_EMAIL = ?
+                            AND   DS_SENHA = ?`;
 
     const [resp] = await config.query(sql, [Email, Senha]);
     return resp[0]
