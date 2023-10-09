@@ -32,16 +32,18 @@ export async function InsertClientes(C) {
 };
 
 export async function Login(Email, Senha) {
-    let sql = ` SELECT  ID_USUARIO	 AS Id,
-                        NM_USUARIO	 AS Nome,
-                        DS_EMAIL	 AS Email,
-                        DS_TIER      AS Tier,
-                        ID_IMG       AS img_perfil
-    from USERS_TB 		             AS U_TB
-        INNER JOIN ENDERECO_TB       AS E_TB 
-                                     ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
-                            WHERE DS_EMAIL = ?
-                            AND   DS_SENHA = ?`;
+    let sql = ` SELECT  ID_USUARIO	  AS Id,
+                        NM_USUARIO	  AS Nome,
+                        DS_EMAIL	  AS Email,
+                        DS_TIER       AS Tier,
+                        ID_IMG        AS img_perfil
+    from USERS_TB 		              AS U_TB
+        INNER JOIN ENDERECO_TB        AS E_TB 
+                                      ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
+        INNER JOIN IMAGES_PERFIL_USER AS I_TB
+                                      ON I_TB.ID_IMG = U_TB.ID_IMG
+        WHERE DS_EMAIL = ?
+        AND   DS_SENHA = ?`;
 
     const [resp] = await config.query(sql, [Email, Senha]);
     return resp[0]
