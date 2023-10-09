@@ -17,7 +17,7 @@ export async function getUsers(Tier) {
 };
 
 export async function InsertClientes(C) {
-    let sql = `INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
+    let sql = `INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
                                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
                                      
     let [resp] = await config.query(sql,  [C.Id_endereco, 
@@ -36,11 +36,9 @@ export async function Login(Email, Senha) {
                         NM_USUARIO	  AS Nome,
                         DS_EMAIL	  AS Email,
                         DS_TIER       AS Tier,
-                        ID_IMG        AS img_perfil,
                         DS_TELEFONE   AS Telefone,
-                        DS_CPF        AS CPF,
-                        DS
-                        
+                        DS_CPF        AS CPF
+
     from USERS_TB 		              AS U_TB
         INNER JOIN ENDERECO_TB        AS E_TB 
                                       ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
