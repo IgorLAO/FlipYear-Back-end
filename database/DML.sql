@@ -4,22 +4,22 @@ USE Flipyear2000_DB;
 -- PERFIL CLIENTES 
 INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
 						VALUES (1, 2, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
-								(2, 1, "JOAO", "0", 0, "joao.admin", "123", 'ADM'),
-                                (2, 1, "Igor", "0", 0, "igor.admin", "123", 'ADM'),
-                                (2, 1, "Italo", "0", 0, "italo.admin", "123", 'ADM'),
+								(2, 1, "JOAO", "0", 0, "joao.admin", "123", 'ADM'    ),
+                                (2, 1, "Igor", "0", 0, "igor.admin", "123", 'ADM'    ),
+                                (2, 1, "Italo", "0", 0, "italo.admin", "123", 'ADM'  ),
                                 (2, 1, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
-                                (2, 1, "David", "0", 0, "david.admin", "123", 'ADM');
+                                (2, 1, "David", "0", 0, "david.admin", "123", 'ADM'  );
                                 
-INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)
-							VALUES('https://dummyimage.com/640x360/fff/aaa', 'https://dummyimage.com/640x360/fff/aaa');
+INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
+							VALUES('2', 'BBBB');
                                
                                
-		select  *
-			from USERS_TB					AS U_TB
-				INNER JOIN ENDERECO_TB 		AS E_TB 
-											ON E_TB.ID_ENDERECO = U_TB.ID_ENDERECO
-			INNER JOIN IMAGES_PERFIL_USER 	AS I_TB
-											ON I_TB.ID_IMG = U_TB.ID_IMG;
+		select  ID_USUARIO			AS Id,
+			 	NM_USUARIO			AS Nome,
+                DS_EMAIL			AS Email
+			from USERS_TB			AS U_TB
+			INNER JOIN ENDERECO_TB AS E_TB 
+									ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO;
 
 			SELECT 	ID_USUARIO,
 					NM_USUARIO    AS Nome,
@@ -44,7 +44,10 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)
 		-- PRODUTOS
 			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_PRMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
 									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira");
-									
+			
+            SELECT *
+				FROM PRODUTO_TB;
+            
 			INSERT INTO CATEGORIA_TB (NM_CATEGORIA)
 									 VALUES("Fliperama");
 -- ---------------------

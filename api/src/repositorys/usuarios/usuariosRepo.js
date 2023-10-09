@@ -36,7 +36,11 @@ export async function Login(Email, Senha) {
                         NM_USUARIO	  AS Nome,
                         DS_EMAIL	  AS Email,
                         DS_TIER       AS Tier,
-                        ID_IMG        AS img_perfil
+                        ID_IMG        AS img_perfil,
+                        DS_TELEFONE   AS Telefone,
+                        DS_CPF        AS CPF,
+                        DS
+                        
     from USERS_TB 		              AS U_TB
         INNER JOIN ENDERECO_TB        AS E_TB 
                                       ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
