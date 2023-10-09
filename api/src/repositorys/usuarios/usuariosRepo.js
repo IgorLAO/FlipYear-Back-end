@@ -17,8 +17,8 @@ export async function getUsers(Tier) {
 };
 
 export async function InsertClientes(C) {
-    let sql = `INSERT INTO USERS_TB  (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-                                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    let sql = `INSERT INTO USERS_TB (ID_ENDERECO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
+                                    VALUES (?, ?, ?, ?, ?, ?, ?)`;
                                      
     let [resp] = await config.query(sql,  [C.Id_endereco, 
                                            C.Nome, 
