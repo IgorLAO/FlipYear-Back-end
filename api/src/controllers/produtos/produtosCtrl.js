@@ -63,6 +63,9 @@ server.post('/produtos', async (req, resp) => {
 
 //consulta
 server.get('/produtos/busca', async (req, resp) => {
+
+
+
     try {
         const resposta = await ConsultProd(req.query.busca);
         resp.send(resposta);

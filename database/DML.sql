@@ -62,16 +62,3 @@ INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
 			WHERE ID_PRODUTO = ?;
 	-- -
 
---INSERTS DE PRODUTOS BODY --
-
-{
-  "categoria": "1",
-  "nome": "Castlevania: Symphony of the Night",
-  "preco": "333.00",
-  "precoPromocao": "250.50",
-  "destaque": "1",
-  "promocao": "1",
-  "disponivel": "1",
-  "estoque": "10",
-  "detalhes": "Castlevania: Symphony of the Night[a] é um jogo de ação-aventura 2D desenvolvido e distribuído pela Konami em 1997. Ele é o 13º título da série Castlevania, sendo o primeiro a ser lançado para o console PlayStation e a sequência cronológica de Castlevania: Rondo of Blood."
-}

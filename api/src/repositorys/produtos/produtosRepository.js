@@ -13,8 +13,8 @@ export async function ListProd(qtd, offset) {
 
 export async function InsertProdutos(produto) {
     const resp = `
-    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
-       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?) `
+    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
+       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) `
 
     const [linhas] = await config.query(resp, [
         produto.categoria,
@@ -25,7 +25,11 @@ export async function InsertProdutos(produto) {
         produto.promocao,
         produto.disponivel,
         produto.estoque,
-        produto.detalhes
+        produto.detalhes,
+        produto.avaliacao,
+        produto.fabricante,
+        produto.estado,
+        produto.colecionador
     ]);
 
     produto.id = linhas.insertId
