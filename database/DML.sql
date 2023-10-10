@@ -42,7 +42,7 @@ INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
 											("341343978", "Beverly hills", " Rua Gigachad da silva "," CASA QUE FICA PERTO DE UMA CALÇADA", 123);
 									 
 		-- PRODUTOS
-			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONA, BT_PRMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
+			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
 									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira");
 			
             SELECT *
@@ -61,3 +61,17 @@ INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
 		DELETE FROM TB_PRODUTO
 			WHERE ID_PRODUTO = ?;
 	-- -
+
+--INSERTS DE PRODUTOS BODY --
+
+{
+  "categoria": "1",
+  "nome": "Castlevania: Symphony of the Night",
+  "preco": "333.00",
+  "precoPromocao": "250.50",
+  "destaque": "1",
+  "promocao": "1",
+  "disponivel": "1",
+  "estoque": "10",
+  "detalhes": "Castlevania: Symphony of the Night[a] é um jogo de ação-aventura 2D desenvolvido e distribuído pela Konami em 1997. Ele é o 13º título da série Castlevania, sendo o primeiro a ser lançado para o console PlayStation e a sequência cronológica de Castlevania: Rondo of Blood."
+}
