@@ -1,6 +1,5 @@
 import config from "../DB/db_connection.js";
 
-
 export async function ListEnderecos(){
     let sql = `SELECT * 
                     FROM ENDERECO_TB`

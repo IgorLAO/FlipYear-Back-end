@@ -6,7 +6,7 @@ let server = Router();
 server.get('/produtos', async (req, resp) => {
     try {
         const qtd = 4;
-        const pag = req.query.pagina;
+        const pag = req.query.pagina || 1;
         const offset = (pag-1) * qtd;
 
         const getData = await ListProd(qtd, offset);
