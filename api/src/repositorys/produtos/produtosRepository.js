@@ -13,11 +13,12 @@ export async function ListProd(qtd, offset) {
 
 export async function InsertProdutos(produto) {
     const resp = `
-    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
+    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, ID_IMAGEM_PRODUTO, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
        VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?) `
 
     const [linhas] = await config.query(resp, [
         produto.categoria,
+        produto.img,
         produto.nome,
         produto.preco,
         produto.precoPromocao,
@@ -49,6 +50,7 @@ export async function ConsultProd(busca) {
     SELECT *
 				FROM PRODUTO_TB 		AS P 
 			INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+            INNER JOIN IMAGEM_PRODUTO_TB	AS IMG ON IMG.ID_IMAGEM_PRODUTO = P.ID_IMAGEM_PRODUTO
         `
     const [resp] = await config.query(chamar)
     return resp
