@@ -50,8 +50,7 @@ export async function RemoverProdutos(id) {
 
 
 export async function ConsultProd(busca) {
-    const chamar = ` 
-    SELECT *
+    const chamar = `SELECT *
 				FROM PRODUTO_TB 		AS P 
 			INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
             INNER JOIN IMAGEM_PRODUTO_TB	AS IMG ON IMG.ID_IMAGEM_PRODUTO = P.ID_IMAGEM_PRODUTO

@@ -10,7 +10,7 @@ INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_E
                                 (2, 1, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
                                 (2, 1, "David", "0", 0, "david.admin", "123", 'ADM'  );
                                 
-INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
+INSERT INTO IMAGES_PERFIL_USER (DS_BANNER, DS_IMG_PERFIL)
 							VALUES('2', 'BBBB');
                                
                                
@@ -42,14 +42,14 @@ INSERT INTO IMG_PERFIL_USER (ID_USUARIO, DS_IMG)
 											("341343978", "Beverly hills", " Rua Gigachad da silva "," CASA QUE FICA PERTO DE UMA CALÇADA", 123);
 									 
 		-- PRODUTOS
-			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES)
-									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira");
+			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
+									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira", 15.5, 'HASBRO' );
 			
             SELECT *
 				FROM PRODUTO_TB;
             
 			INSERT INTO CATEGORIA_TB (NM_CATEGORIA)
-									 VALUES("Fliperama");
+									 VALUES("OIII");
 -- ---------------------
 
   -- ----									 
