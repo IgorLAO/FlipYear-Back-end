@@ -43,7 +43,7 @@ INSERT INTO IMAGES_PERFIL_USER (DS_BANNER, DS_IMG_PERFIL)
 									 
 		-- PRODUTOS
 			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
-									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira", 15.5, 'HASBRO' );
+									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira", 9.5, 'HASBRO', 'VELHO', );
 			
             SELECT *
 				FROM PRODUTO_TB;
@@ -61,4 +61,22 @@ INSERT INTO IMAGES_PERFIL_USER (DS_BANNER, DS_IMG_PERFIL)
 		DELETE FROM TB_PRODUTO
 			WHERE ID_PRODUTO = ?;
 	-- -
+    
+    
+    SELECT 
+			NM_PRODUTO			 	AS Nome, 
+			VL_PRECO			 	AS Preco, 
+			VL_PRECO_PROMOCIONAL 	AS Promo, 
+			BT_DESTAQUE				AS Destaque, 
+			BT_PROMOCAO				AS IsPromo, 
+			BT_DISPONIVEL			AS IsDisponivel, 
+			QTD_ESTOQUE				AS Qtd_estq, 
+			DS_DETALHES				AS Detalhes, 
+			VL_AVALIACAO			AS Avaliacao,	 
+			NM_FABRICANTE			AS Fabricante, 
+			TP_ESTADO				AS Estado, 
+			TP_COLECIONADOR			AS Colecionador
+			FROM PRODUTO_TB 		AS P 
+	 INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA;
+     WHERE NM_PRODUTO 
 

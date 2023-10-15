@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { AlterarProduto, ConsultProd, InsertProdutos, ListProd, RemoverProdutos } from "../../repositorys/produtos/produtosRepository.js";
+import { AlterarProduto, 
+         InsertProdutos, 
+         ListProd, 
+         RemoverProdutos, 
+         SearchProd } from "../../repositorys/produtos/produtosRepository.js";
+
 
 let server = Router();
 //LISTAR
@@ -34,7 +39,6 @@ server.get('/produtos', async (req, resp) => {
 server.post('/produtos', async (req, resp) => {
     try {
         const produtos = req.body
-
         if (!produtos.nome) {
             throw new Error("Informe o nome")
         }
@@ -61,15 +65,20 @@ server.post('/produtos', async (req, resp) => {
     }
 });
 
-//consulta
+//Busca
 server.get('/produtos/busca', async (req, resp) => {
     try {
-        const resposta = await ConsultProd(req.query.busca);
-        resp.send(resposta);
+        let busca = req.query.search
+        let res = await SearchProd(busca);
+
+        if(res.length == 0)
+            throw new Error("nao encontrado");
+
+        resp.send(res);
     } catch (err) {
         resp.status(400).send({
-            err: "Ocorreu um Erro"
-        })
+            erro: err.message
+        });
     }
 })
 
