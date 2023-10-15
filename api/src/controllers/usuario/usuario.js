@@ -103,5 +103,5 @@ server.delete('/usuario/:id', async (req, resp) => {
         resp.status(405).send({ erro: err.message })
     }
 })
-
+ 
 export default server;
