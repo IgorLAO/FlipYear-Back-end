@@ -13,7 +13,7 @@ export async function ListarCarrinho(id){
     BT_PROMOCAO
     FROM CARRINHO_TB
     INNER JOIN PRODUTO_TB ON CARRINHO_TB.ID_PRODUTO = PRODUTO_TB.ID_PRODUTO
-    WHERE ID_USUARIO = ?
+    WHERE ID_USUARIO = ?;
     
     `
 
