@@ -94,6 +94,19 @@ export async function SearchProd(search) {
     return resp
 }
 
+export async function ConsultarProdPorId(id){
+
+
+    let comando = `
+    SELECT * FROM PRODUTO_TB
+                WHERE ID_PRODUTO = ?
+    `
+
+    const [resp] = await config.query(comando, [id])
+    return resp;
+
+}
+
 export async function AlterarProduto(id, produto) {
     const comando = `
             UPDATE PRODUTO_TB
