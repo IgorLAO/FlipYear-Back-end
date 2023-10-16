@@ -84,14 +84,10 @@ server.post('/produtos', async (req, resp) => {
 //Busca
 server.get('/produto/busca', async (req, resp) => {
     try {
-        console.log('1')
         let busca  = req.query.search
-        console.log('2')
         let res = await SearchProd(busca);
-        console.log('3')
         if(res.length <= 0)
             throw new Error("nao encontrado");
-            console.log('4')
         resp.send(res);
     } catch (err) {
         resp.status(400).send({
