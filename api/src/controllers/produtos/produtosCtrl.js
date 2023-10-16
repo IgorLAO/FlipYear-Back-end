@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd } from "../../repositorys/produtos/produtosRepository.js";
+import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd } from "../../repositorys/produtos/produtosRepository.js";
 
 let server = Router();
 //LISTAR
