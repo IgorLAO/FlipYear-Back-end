@@ -65,29 +65,9 @@ export async function SearchProd(search) {
                             TP_COLECIONADOR			AS Colecionador
                             FROM PRODUTO_TB 		AS P 
                         INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-                        WHERE NM_PRODUTO			 like ? OR
-                                VL_PRECO			 like ? OR
-                                VL_PRECO_PROMOCIONAL like ? OR
-                                BT_DESTAQUE			 like ? OR
-                                BT_PROMOCAO			 like ? OR
-                                BT_DISPONIVEL		 like ? OR
-                                QTD_ESTOQUE			 like ? OR
-                                DS_DETALHES			 like ? OR
-                                VL_AVALIACAO		 like ? OR
-                                NM_FABRICANTE		 like ? OR
-                                TP_ESTADO			 like ? OR
-                                TP_COLECIONADOR		 like ?`;
+                        WHERE   NM_PRODUTO			 like ?  `
 
     const [resp] = await config.query(sql, [
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%',
                                             '%' + search + '%',
                                             '%' + search + '%',
                                             '%' + search + '%'])

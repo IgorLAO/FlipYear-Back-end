@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos } from "../../repositorys/produtos/produtosRepository.js";
+import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd } from "../../repositorys/produtos/produtosRepository.js";
 
 let server = Router();
 //LISTAR
@@ -82,14 +82,16 @@ server.post('/produtos', async (req, resp) => {
 });
 
 //Busca
-server.get('/produtos/busca', async (req, resp) => {
+server.get('/produto/busca', async (req, resp) => {
     try {
-        let busca = req.query.search
+        console.log('1')
+        let busca  = req.query.search
+        console.log('2')
         let res = await SearchProd(busca);
-
-        if(res.length == 0)
+        console.log('3')
+        if(res.length <= 0)
             throw new Error("nao encontrado");
-
+            console.log('4')
         resp.send(res);
     } catch (err) {
         resp.status(400).send({
