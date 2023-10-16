@@ -135,3 +135,15 @@ export async function AlterarProduto(id, produto) {
     return resp.affectedRows;
 }
 
+export async function ListDestProd(qtd, offset){
+    const sql = `			SELECT *
+    FROM PRODUTO_TB 		AS P 
+    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+    where bt_destaque = 1
+    order by nm_produto
+    limit ?
+    offset ?;`
+
+    const [resp] = await config.query(sql, [qtd, offset])
+    return resp;
+}
