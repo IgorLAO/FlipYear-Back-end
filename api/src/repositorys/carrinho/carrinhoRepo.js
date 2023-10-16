@@ -14,7 +14,6 @@ export async function ListarCarrinho(id){
     FROM CARRINHO_TB
     INNER JOIN PRODUTO_TB ON CARRINHO_TB.ID_PRODUTO = PRODUTO_TB.ID_PRODUTO
     WHERE ID_USUARIO = ?;
-    
     `
 
     let [resp] = await config.query(comando, [id]);

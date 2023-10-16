@@ -146,4 +146,37 @@ server.delete('/produtos/:id', async (req, resp) => {
         })
     }
 })
+
+//Listar Produtos em destaques
+server.get('/produtosDestaque', async (req, resp) => {
+    try {
+        const qtd = 4
+        const pag = req.query.pagina
+        const offset = (pag - 1) * 1
+
+        const getData = await ListDestProd(qtd, offset)
+        if(getData.length <= 0)
+            throw new Error('Produto não encontrado.')
+            resp.send(getData);
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+//Listar todos os produtos
+server.get('/produtos', async (req, resp) =>{
+    try {
+        const getData =await ListAllProd()
+        if(getData.length <= 0)
+            throw new Error('Produto não encontrado.')
+            resp.send(getData);
+    } catch (err) {
+        resp.status(400).send({
+            erro:err.message
+        })
+    }
+})
+
 export default server;
