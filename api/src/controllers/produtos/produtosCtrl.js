@@ -5,7 +5,7 @@ let server = Router();
 //LISTAR
 server.get('/produtos', async (req, resp) => {
     try {
-        const qtd = 4;
+        const qtd = 200;
         const pag = req.query.pagina || 1;
         const offset = (pag-1) * qtd;
 
@@ -27,7 +27,6 @@ server.get('/produtos', async (req, resp) => {
         resp.status(404).send({erro: err.message})
     }
 });
-
 
 
 //inserir produto
