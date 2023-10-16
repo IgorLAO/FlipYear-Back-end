@@ -77,9 +77,7 @@ export async function SearchProd(search) {
                         WHERE   NM_PRODUTO			 like ?  `
 
     const [resp] = await config.query(sql, [
-                                            '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%'])
+                                            search + '%'])
     return resp
 }
 
