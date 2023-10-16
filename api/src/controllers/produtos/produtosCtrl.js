@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { AlterarProduto, ConsultProd, InsertProdutos, ListProd, RemoverProdutos } from "../../repositorys/produtos/produtosRepository.js";
+import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos } from "../../repositorys/produtos/produtosRepository.js";
 
 let server = Router();
 //LISTAR
 server.get('/produtos', async (req, resp) => {
     try {
-        const qtd = 4;
+        const qtd = 200;
         const pag = req.query.pagina || 1;
         const offset = (pag-1) * qtd;
 
@@ -28,13 +28,33 @@ server.get('/produtos', async (req, resp) => {
     }
 });
 
+//pegar produto por id
+
+server.get('/produtos/:id', async (req, resp) =>{
+
+    try{
+
+        const { id } = req.params;
+        let data = await ConsultarProdPorId(id);
+        resp.send(data);
+
+
+    }
+
+    catch (err){
+
+        resp.status(404).send({erro:err.message})
+
+    }
+
+
+})
 
 
 //inserir produto
 server.post('/produtos', async (req, resp) => {
     try {
         const produtos = req.body
-
         if (!produtos.nome) {
             throw new Error("Informe o nome")
         }
@@ -61,18 +81,20 @@ server.post('/produtos', async (req, resp) => {
     }
 });
 
-//consulta
+//Busca
 server.get('/produtos/busca', async (req, resp) => {
-
-
-
     try {
-        const resposta = await ConsultProd(req.query.busca);
-        resp.send(resposta);
+        let busca = req.query.search
+        let res = await SearchProd(busca);
+
+        if(res.length == 0)
+            throw new Error("nao encontrado");
+
+        resp.send(res);
     } catch (err) {
         resp.status(400).send({
-            err: "Ocorreu um Erro"
-        })
+            erro: err.message
+        });
     }
 })
 

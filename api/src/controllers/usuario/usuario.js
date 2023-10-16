@@ -14,6 +14,7 @@ server.get('/usuarios', async (req, resp) => {
     }   
 });
 
+
 server.get('/adms', async (req, resp) => {
     try {
         let data = await getADM();
@@ -103,5 +104,5 @@ server.delete('/usuario/:id', async (req, resp) => {
         resp.status(405).send({ erro: err.message })
     }
 })
-
+ 
 export default server;
