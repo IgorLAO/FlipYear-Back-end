@@ -14,6 +14,7 @@ server.get('/usuarios', async (req, resp) => {
     }   
 });
 
+
 server.get('/adms', async (req, resp) => {
     try {
         let data = await getADM();
