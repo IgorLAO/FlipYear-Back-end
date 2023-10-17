@@ -10,9 +10,11 @@ INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_E
                                 (2, 1, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
                                 (2, 1, "David", "0", 0, "david.admin", "123", 'ADM'  );
                                 
-INSERT INTO IMAGES_PERFIL_USER (DS_BANNER, DS_IMG_PERFIL)
-							VALUES('2', 'BBBB');
+INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
+							VALUES('/storage/images/profile');
                                
+                               SELECT *
+                               FROM IMAGES_PERFIL_USER;
                                
 		select  ID_USUARIO			AS Id,
 			 	NM_USUARIO			AS Nome,

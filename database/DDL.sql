@@ -4,9 +4,14 @@ USE Flipyear2000_DB;
  
 CREATE TABLE IMAGES_PERFIL_USER(
 	ID_IMG			INT PRIMARY  KEY auto_increment,
-    DS_IMG_PERFIL	VARCHAR(400),
-    DS_BANNER		VARCHAR(400)
-); 
+    DS_IMG_PERFIL	VARCHAR(400)
+);
+
+
+UPDATE IMAGES_PERFIL_USER 
+                         SET DS_IMG_PERFIL = 'IGOR FODA 2', DS_BANNER = 'IGOR FODA'
+                         WHERE ID_IMG = 1;
+ 
  
 CREATE TABLE USERS_TB(
 	ID_USUARIO			INT primary KEY auto_increment,
