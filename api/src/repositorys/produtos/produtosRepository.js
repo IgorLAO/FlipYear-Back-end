@@ -11,7 +11,7 @@ export async function ListProd(qtd, offset) {
     return resp
 }
 
-export async function ListAllProd(){
+export async function ListAllProd() {
     const sql = `SELECT	*
                     FROM PRODUTO_TB 		    AS P 
                 INNER JOIN CATEGORIA_TB		    AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
@@ -77,11 +77,11 @@ export async function SearchProd(search) {
                         WHERE   NM_PRODUTO			 like ?  `
 
     const [resp] = await config.query(sql, [
-                                            search + '%'])
+        search + '%'])
     return resp
 }
 
-export async function ConsultarProdPorId(id){
+export async function ConsultarProdPorId(id) {
 
 
     let comando = `
@@ -122,7 +122,7 @@ export async function AlterarProduto(id, produto) {
     return resp.affectedRows;
 }
 
-export async function ListDestProd(qtd, offset){
+export async function ListDestProd(qtd, offset) {
     const sql = `			SELECT *
     FROM PRODUTO_TB 		AS P 
     INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
@@ -134,3 +134,4 @@ export async function ListDestProd(qtd, offset){
     const [resp] = await config.query(sql, [qtd, offset])
     return resp;
 }
+

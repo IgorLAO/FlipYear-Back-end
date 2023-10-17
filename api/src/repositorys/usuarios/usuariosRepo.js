@@ -72,3 +72,11 @@ export async function Delete(id){
     
     return resp.affectedRows
 };
+
+export async function InsertProfileImages(profile, id) { 
+    const sql = ` UPDATE IMAGES_PERFIL_USER 
+            SET DS_IMG_PERFIL = ?
+                 WHERE ID_IMG = ?`;
+    const [resp] = await config.query(sql, [profile, id])
+    return resp.affectedRows
+}; 
