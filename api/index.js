@@ -6,6 +6,7 @@ import usuarioController from './src/controllers/usuario/usuario.js';
 import produtosCtrl from './src/controllers/produtos/produtosCtrl.js';
 import enderecosCtrls from './src/controllers/endereco/enderecosCtrls.js';
 import carrinhoCtrl from './src/controllers/carrinho/carrinhoCtrl.js'
+import commentCtrl from './src/controllers/comentarios/comentariosCrtl.js'
 
 
 const server = express();
@@ -21,3 +22,4 @@ server.use(usuarioController);
 server.use(produtosCtrl);
 server.use(enderecosCtrls);
 server.use(carrinhoCtrl);
+server.use(commentCtrl);
