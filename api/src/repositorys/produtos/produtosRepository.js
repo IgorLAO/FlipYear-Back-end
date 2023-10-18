@@ -126,7 +126,7 @@ export async function ListDestProd(qtd, offset) {
     const sql = `			SELECT *
     FROM PRODUTO_TB 		AS P 
     INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-    where bt_destaque = 1
+    where bt_destaque = true
     order by nm_produto
     limit ?
     offset ?;`
