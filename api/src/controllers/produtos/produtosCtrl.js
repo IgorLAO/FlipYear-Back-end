@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd } from "../../repositorys/produtos/produtosRepository.js";
+import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd, ListAllProd } from "../../repositorys/produtos/produtosRepository.js";
 
 let server = Router();
 //LISTAR
 server.get('/produtos', async (req, resp) => {
     try {
-        const qtd = 200;
+        const qtd = 50;
         const pag = req.query.pagina || 1;
         const offset = (pag-1) * qtd;
 
