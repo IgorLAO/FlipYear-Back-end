@@ -17,7 +17,10 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
                                
                                SELECT *
                                FROM USERS_TB;
-                               
+
+
+		INSERT INTO COMENTARIOS_TB (ID_USUARIO, DS_COMENTARIO, DT_COMENTARIO, QTD_LIKES, BT_DENUNCIA)
+						VALUES (1, 'Produto veio amassado, não gostei!! NÃO RECOMENDO!!!!', '2020-05-23', 24, 0); 
                                
 	SELECT * 
 		FROM USERS_TB 				  AS U_TB
