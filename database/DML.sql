@@ -15,9 +15,6 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
 							VALUES('/storage/images/profile');	
                                
                                SELECT *
-<<<<<<< HEAD
-                               FROM IMAGES_PERFIL_USER;
-=======
                                FROM USERS_TB;
 
 
@@ -30,7 +27,6 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
 									  ON  U_TB.ID_IMG = IMG_TB.ID_IMG
 		INNER JOIN ENDERECO_TB 		  AS E_TB 
 									  ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO;
->>>>>>> 81fcb7e26a45e57f28efe012ff9dab98dcde41c7
                                
 		select  ID_USUARIO			AS Id,
 			 	NM_USUARIO			AS Nome,
