@@ -8,11 +8,6 @@ CREATE TABLE IMAGES_PERFIL_USER(
 );
 
 
-UPDATE IMAGES_PERFIL_USER 
-                         SET DS_IMG_PERFIL = 'IGOR FODA 2', DS_BANNER = 'IGOR FODA'
-                         WHERE ID_IMG = 1;
- 
- 
 CREATE TABLE USERS_TB(
 	ID_USUARIO			INT primary KEY auto_increment,
     ID_ENDERECO			INT NOT NULL,
@@ -27,7 +22,7 @@ CREATE TABLE USERS_TB(
     FOREIGN KEY (ID_IMG) REFERENCES IMAGES_PERFIL_USER(ID_IMG)
 );
 
-drop table IMAGES_PERFIL_USER;
+drop table users_tb;
 
 CREATE TABLE COMENTARIOS_TB (
 	ID_COMENTARIO		INT PRIMARY KEY auto_increment NOT NULL,
@@ -77,7 +72,7 @@ CREATE TABLE PEDIDO_ITEM_TB(
 		FOREIGN KEY (ID_PRODUTO) REFERENCES PRODUTO_TB(ID_PRODUTO)
 );
 
--- --------------------------------------------------------------- --
+-- ------------------------------ --------------------------------- --
 
 CREATE TABLE PRODUTO_TB(
 	ID_PRODUTO					INT primary KEY auto_increment,
@@ -102,10 +97,6 @@ CREATE TABLE CATEGORIA_TB (
     NM_CATEGORIA				VARCHAR(100)
 );
 
-INSERT INTO CATEGORIA_TB (NM_CATEGORIA)
-        VALUES ('Jogo'),
-                ('Console'),
-                ('Fliperama');
 
 CREATE TABLE IMAGEM_PRODUTO_TB(
 	ID_IMAGEM_PRODUTO			INT primary KEY auto_increment,
