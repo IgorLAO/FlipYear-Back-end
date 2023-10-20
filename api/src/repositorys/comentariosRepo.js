@@ -1,4 +1,4 @@
-import config from "../DB/db_connection.js";
+import config from "./db_connection.js";
 
 export async function ListComments(qtd, offset){
     const sql = `select US_TB.ID_USUARIO 							AS ID,

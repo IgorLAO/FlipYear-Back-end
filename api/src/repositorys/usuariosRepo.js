@@ -1,4 +1,5 @@
-import config from "../DB/db_connection.js";
+import { query } from "express";
+import config from "./db_connection.js";
 
 export async function getUsers(Tier) {
     let sql = `	SELECT  ID_USUARIO      AS      Id,
@@ -8,7 +9,12 @@ export async function getUsers(Tier) {
                         DS_CPF          AS      CPF,
                         NM_CIDADE       AS      Nome_Cidade,
                         NM_RUA          AS      Nome_Rua,
-                        NR_NUMERO       AS      Numero  
+                        NR_NUMERO       AS      Numero ,
+                        DS_IMG_PERFIL	  AS      ImageProfile,
+                        DS_BANNER         AS      ImageBanner
+            FROM USERS_TB 				  AS U_TB
+            INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
+                                          ON  U_TB.ID_IMG = IMG_TB.ID_IMG 
                       FROM USERS_TB	    AS C_TB
                 INNER JOIN ENDERECO_TB AS E_TB 
                                         ON E_TB.ID_ENDERECO= C_TB.ID_ENDERECO`;
@@ -16,18 +22,41 @@ export async function getUsers(Tier) {
     return resp
 };
 
+export async function GetUserById(id) {
+    let sql = `                               
+            SELECT  ID_USUARIO        AS      Id,
+                    NM_USUARIO        AS      Nome,
+                    DS_EMAIL          AS      Email,
+                    DS_TELEFONE       AS      Telefone,
+                    DS_CPF            AS      CPF,
+                    NM_CIDADE         AS      Nome_Cidade,
+                    NM_RUA            AS      Nome_Rua,
+                    NR_NUMERO         AS      Numero,
+                    DS_IMG_PERFIL	  AS      ImageProfile,
+                    DS_BANNER         AS      ImageBanner
+		FROM USERS_TB 				  AS U_TB
+        INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
+									  ON  U_TB.ID_IMG = IMG_TB.ID_IMG
+		INNER JOIN ENDERECO_TB 		  AS E_TB 
+									  ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
+			WHERE ID_USUARIO = ?`;
+
+    const [resp] = await config.query(sql, [id]);
+    return resp
+}
+
 export async function InsertClientes(C) {
     let sql = `INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
                                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
-                                     
-    let [resp] = await config.query(sql,  [C.Id_endereco, 
-                                           C.Nome, 
-                                           C.Telefone, 
-                                           C.CPF, 
-                                           C.Email, 
-                                           C.Senha,
-                                           C.Tier]);
-                                         
+
+    let [resp] = await config.query(sql, [C.Id_endereco,
+    C.Nome,
+    C.Telefone,
+    C.CPF,
+    C.Email,
+    C.Senha,
+    C.Tier]);
+
     return resp
 };
 
@@ -51,29 +80,29 @@ export async function Login(Email, Senha) {
     return resp[0]
 }
 
-export async function SearchUser(search){
+export async function SearchUser(search) {
     let sql = `SELECT *
                          FROM USERS_TB
                 WHERE NM_USUARIO  LIKE ? 
                       OR DS_CPF   LIKE ?
                       OR DS_EMAIL LIKE ?`
-    let [resp] = await config.query(sql, [  '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%']);
+    let [resp] = await config.query(sql, ['%' + search + '%',
+    '%' + search + '%',
+    '%' + search + '%']);
     console.log(resp);
-    
+
     return resp
 };
 
-export async function Delete(id){
+export async function Delete(id) {
     let sql = `DELETE FROM USERS_TB
                       WHERE ID_USUARIO = ?`;
-    let [resp] = await config.query(sql, [ id])
-    
+    let [resp] = await config.query(sql, [id])
+
     return resp.affectedRows
 };
 
-export async function InsertProfileImages(profile, id) { 
+export async function InsertProfileImages(profile, id) {
     const sql = ` UPDATE IMAGES_PERFIL_USER 
             SET DS_IMG_PERFIL = ?
                  WHERE ID_IMG = ?`;

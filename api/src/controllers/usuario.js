@@ -1,11 +1,11 @@
 import multer from "multer";
 import { Router } from "express";
-import { Delete, InsertClientes, InsertProfileImages, Login, SearchUser, getUsers } from "../../repositorys/usuarios/usuariosRepo.js";
-import { getADM } from "../../repositorys/ADM.js";
+import { Delete, GetUserById, InsertClientes, InsertProfileImages, Login, SearchUser, getUsers } from "../repositorys/usuariosRepo.js";
+import { getADM } from "../repositorys/ADM.js";
 
 
 const server = Router();
-const upload = multer({dest: 'storage/images/profileImages'})
+const upload = multer({ dest: 'storage/images/profileImages' })
 
 server.get('/usuarios', async (req, resp) => {
     try {
@@ -14,7 +14,18 @@ server.get('/usuarios', async (req, resp) => {
 
     } catch (err) {
         resp.send(err.message)
-    }   
+    }
+});
+
+server.get('/usuario/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+        let r = await GetUserById(id);
+
+        resp.send(r)
+    } catch (error) {
+        resp.send(err.message)
+    }
 });
 
 
@@ -25,7 +36,7 @@ server.get('/adms', async (req, resp) => {
 
     } catch (err) {
         resp.send(err.message)
-    }   
+    }
 });
 
 server.post('/usuarios', async (req, resp) => {
@@ -78,11 +89,11 @@ server.post('/usuarios/login', async (req, resp) => {
 
 server.put('/usuario/:id/images', upload.single('profile'), async (req, resp) => {
     const profilePic = req.file.path;
-       const {id} = req.params;
-       const respN = await InsertProfileImages(profilePic, id)
+    const { id } = req.params;
+    const respN = await InsertProfileImages(profilePic, id)
 
-        resp.status(204).send();
-  
+    resp.status(204).send();
+
 });
 
 server.get('/usuarios/busca', async (req, resp) => {
@@ -116,5 +127,5 @@ server.delete('/usuario/:id', async (req, resp) => {
         resp.status(405).send({ erro: err.message })
     }
 })
- 
+
 export default server;

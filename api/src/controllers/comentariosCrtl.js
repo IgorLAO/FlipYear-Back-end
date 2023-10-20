@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ListComments, DeleteComment } from "../../repositorys/comentarios/comentariosRepo.js";
+import { ListComments, DeleteComment } from "../repositorys/comentariosRepo.js";
 
 let server = Router()
 

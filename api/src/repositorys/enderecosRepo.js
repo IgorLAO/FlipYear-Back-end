@@ -1,4 +1,4 @@
-import config from "../DB/db_connection.js";
+import config from "./db_connection.js";
 
 export async function ListEnderecos(){
     let sql = `SELECT * 

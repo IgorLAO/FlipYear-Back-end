@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { InserirProdutoNoCarrinho, ListarCarrinho, LimparCarrinho, RemoverProdutoDoCarrinho, AlterarProdutosDoEstoque, AlterarQtdNoCarrinho } from "../../repositorys/carrinho/carrinhoRepo.js";
+import { InserirProdutoNoCarrinho, ListarCarrinho, LimparCarrinho, RemoverProdutoDoCarrinho, AlterarProdutosDoEstoque, AlterarQtdNoCarrinho } from "../repositorys/carrinhoRepo.js";
 
 let server = Router();
 

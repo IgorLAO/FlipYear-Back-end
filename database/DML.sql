@@ -3,18 +3,28 @@ USE Flipyear2000_DB;
 
 -- PERFIL CLIENTES 
 INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES (1, 2, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
-								(2, 1, "JOAO", "0", 0, "joao.admin", "123", 'ADM'    ),
-                                (2, 1, "Igor", "0", 0, "igor.admin", "123", 'ADM'    ),
-                                (2, 1, "Italo", "0", 0, "italo.admin", "123", 'ADM'  ),
-                                (2, 1, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
-                                (2, 1, "David", "0", 0, "david.admin", "123", 'ADM'  );
+						VALUES	(1, 1, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
+								(2, 2, "JOAO", "0", 0, "joao.admin", "123", 'ADM'    ),
+                                (2, 3, "Igor", "0", 0, "igor.admin", "123", 'ADM'    ),
+                                (2, 4, "Italo", "0", 0, "italo.admin", "123", 'ADM'  ),
+                                (2, 5, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
+                                (2, 6, "David", "0", 0, "david.admin", "123", 'ADM'  );
+							
                                 
 INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
 							VALUES('/storage/images/profile');
+                            
                                
                                SELECT *
-                               FROM IMAGES_PERFIL_USER;
+                               FROM USERS_TB;
+                               
+                               
+	SELECT * 
+		FROM USERS_TB 				  AS U_TB
+        INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
+									  ON  U_TB.ID_IMG = IMG_TB.ID_IMG
+		INNER JOIN ENDERECO_TB 		  AS E_TB 
+									  ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO;
                                
 		select  ID_USUARIO			AS Id,
 			 	NM_USUARIO			AS Nome,
@@ -61,7 +71,7 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
   -- --
 	-- -	DELETE
 		DELETE FROM TB_PRODUTO
-			WHERE ID_PRODUTO = ?;
+				WHERE ID_PRODUTO = ?;
 	-- -
     
     

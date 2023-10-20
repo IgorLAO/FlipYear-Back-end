@@ -2,16 +2,19 @@ import 'dotenv/config';
 import cors from "cors";
 import express from 'express';
 
-import usuarioController from './src/controllers/usuario/usuario.js';
-import produtosCtrl from './src/controllers/produtos/produtosCtrl.js';
-import enderecosCtrls from './src/controllers/endereco/enderecosCtrls.js';
-import carrinhoCtrl from './src/controllers/carrinho/carrinhoCtrl.js'
-import commentCtrl from './src/controllers/comentarios/comentariosCrtl.js'
+import usuarioController from './src/controllers/usuario.js';
+import produtosCtrl from './src/controllers/produtosCtrl.js';
+import enderecosCtrls from './src/controllers/enderecosCtrls.js';
+import carrinhoCtrl from './src/controllers/carrinhoCtrl.js'
+import commentCtrl from './src/controllers/comentariosCrtl.js'
 
 
 const server = express();
+
+server.use('/storage/images/profileImages', express.static('storage/images/profileImages'));
 server.use(cors());
 server.use(express.json());
+
 
 server.listen(process.env.PORT,() => console.log(`
         API ONLINE NA PORTA ${process.env.PORT}

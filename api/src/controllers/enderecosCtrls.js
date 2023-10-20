@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { InsertEnderecos, ListEnderecos } from "../../repositorys/enderecos/enderecosRepo.js";
+import { InsertEnderecos, ListEnderecos } from "../repositorys/enderecosRepo.js";
 
 let server = Router();
 
