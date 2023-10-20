@@ -28,6 +28,21 @@ server.get('/produtos', async (req, resp) => {
     }
 });
 
+server.get('/outrosprodutos', async (req, resp) => {
+    try {
+        const qtd = 4;
+        const pag = req.query.pagina || 1;
+        const offset = (pag-1) * qtd;
+
+        const getData = await ListProd(qtd, offset);
+        if(getData.length <= 0)
+            throw new Error('Não encontrado')
+        resp.send(getData);
+    } catch (err) {
+        resp.status(404).send({erro: err.message})
+    }
+})
+
 //pegar produto por id
 
 server.get('/produtos/:id', async (req, resp) =>{
