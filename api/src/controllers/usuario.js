@@ -23,7 +23,7 @@ server.get('/usuario/:id', async (req, resp) => {
         let r = await GetUserById(id);
 
         resp.send(r)
-    } catch (error) {
+    } catch (err) {
         resp.send(err.message)
     }
 });
@@ -90,7 +90,7 @@ server.post('/usuarios/login', async (req, resp) => {
 server.put('/usuario/:id/images', upload.single('profile'), async (req, resp) => {
     const profilePic = req.file.path;
     const { id } = req.params;
-    const respN = await InsertProfileImages(profilePic, id)
+    const respN = await InsertProfileImages(profilePic, id);
 
     resp.status(204).send();
 
