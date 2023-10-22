@@ -5,7 +5,7 @@ import { getADM } from "../repositorys/ADM.js";
 
 
 const server = Router();
-const upload = multer({ dest: 'storage/images/profileImages' })
+const upload = multer({ dest: 'storage/images/profileImages' });
 
 server.get('/usuarios', async (req, resp) => {
     try {
@@ -87,13 +87,13 @@ server.post('/usuarios/login', async (req, resp) => {
     }
 });
 
-server.put('/usuario/:id/images', upload.single('profile'), async (req, resp) => {
-    const profilePic = req.file.path;
-    const { id } = req.params;
-    const respN = await InsertProfileImages(profilePic, id);
+server.put('/usuario/:id/images', upload.fields([{name:'profile', maxCount: 1}, {name: 'banner', maxCount: 1}]), async (req, resp) => {
+    const profilePic = req.files['profile'][0].path;
+    const bannerPic = req.files['banner'][0].path;
+    const { id } = req.params;  
+    const respN = await InsertProfileImages(profilePic, bannerPic, id);
 
     resp.status(204).send();
-
 });
 
 server.get('/usuarios/busca', async (req, resp) => {

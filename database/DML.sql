@@ -3,19 +3,23 @@ use Flipyear2000_DB;
 
 -- PERFIL CLIENTES 
 INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES  (1, 19, "Usuario Totalmente Normal", "0", 0, "NORMAL2", "1234", 'NORMAL_USERS'),
-								(1, 19, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
-								(2, 19, "JOAO", "0", 0, "joao.admin", "123", 'ADM'    ),
-                                (2, 19, "Igor", "0", 0, "igor.admin", "123", 'ADM'    ),
-                                (2, 19, "Italo", "0", 0, "italo.admin", "123", 'ADM'  ),
-                                (2, 19, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
-                                (2, 1, "David", "0", 0, "david.admin", "123", 'ADM'  );
+						VALUES  (1, 1, "Usuario Totalmente Normal", "0", 0, "NORMAL2", "1234", 'NORMAL_USERS'),
+								(1, 2, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
+								(1, 3, "JOAO", "0", 0, "joao.admin", "123", 'ADM'    ),
+								(1, 4, "Igor", "0", 0, "igor.admin", "123", 'ADM'    ),
+								(1, 5, "Italo", "0", 0, "italo.admin", "123", 'ADM'  ),
+								(1, 6, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
+								(1, 7, "David", "0", 0, "david.admin", "123", 'ADM'   );
                                 
-INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
-							VALUES('/storage/images/profile');	
-                               
+INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)	
+							VALUES('/storage/images/profile', '/storage/images/banner');	
+                            
                                SELECT *
                                FROM USERS_TB;
+
+ UPDATE IMAGES_PERFIL_USER 
+            SET DS_IMG_PERFIL = '1321', DS_BANNER = '1212'
+                 WHERE ID_IMG = '1';
 
 
 		INSERT INTO COMENTARIOS_TB (ID_USUARIO, DS_COMENTARIO, DT_COMENTARIO, QTD_LIKES, BT_DENUNCIA)
@@ -41,6 +45,7 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL)
 			FROM    USERS_TB     
 			WHERE   DS_EMAIL      = 'rogerio@gmail.com'
 			AND     DS_SENHA      = '123aa4';
+            
             -- -------
             SELECT *
                          FROM USERS_TB

@@ -2,21 +2,21 @@ import { query } from "express";
 import config from "./db_connection.js";
 
 export async function getUsers(Tier) {
-    let sql = `	SELECT ID_USUARIO        AS      Id,
-    NM_USUARIO        AS      Nome,
-    DS_EMAIL          AS      Email,
-    DS_TELEFONE       AS      Telefone,
-    DS_CPF            AS      CPF,
-                        NM_CIDADE       AS      Nome_Cidade,
-                        NM_RUA          AS      Nome_Rua,
-                        NR_NUMERO       AS      Numero ,
+    let sql = `	SELECT ID_USUARIO         AS      Id,
+                        NM_USUARIO        AS      Nome,
+                        DS_EMAIL          AS      Email,
+                        DS_TELEFONE       AS      Telefone,
+                        DS_CPF            AS      CPF,
+                        NM_CIDADE         AS      Nome_Cidade,
+                        NM_RUA            AS      Nome_Rua,
+                        NR_NUMERO         AS      Numero ,
                         DS_IMG_PERFIL	  AS      ImageProfile,
                         DS_BANNER         AS      ImageBanner
             FROM USERS_TB 				  AS U_TB
             INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
                                           ON  U_TB.ID_IMG = IMG_TB.ID_IMG 
-                      FROM USERS_TB	    AS C_TB
-                INNER JOIN ENDERECO_TB AS E_TB 
+                      FROM USERS_TB	      AS C_TB
+                INNER JOIN ENDERECO_TB    AS E_TB 
                                         ON E_TB.ID_ENDERECO= C_TB.ID_ENDERECO`;
     let [resp] = await config.query(sql)
     return resp
@@ -32,7 +32,8 @@ export async function GetUserById(id) {
                     NM_CIDADE         AS      Nome_Cidade,
                     NM_RUA            AS      Nome_Rua,
                     NR_NUMERO         AS      Numero,
-                    DS_IMG_PERFIL	  AS      ImageProfile
+                    DS_IMG_PERFIL	  AS      ImageProfile,
+                    DS_BANNER         AS      ImageBanner
 		FROM USERS_TB 				  AS U_TB
         INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
 									  ON  U_TB.ID_IMG = IMG_TB.ID_IMG
@@ -60,15 +61,15 @@ export async function InsertClientes(C) {
 };
 
 export async function Login(Email, Senha) {
-    let sql = ` SELECT   ID_USUARIO      AS      Id,
-                                NM_USUARIO      AS      Nome,
-                                DS_EMAIL        AS      Email,
-                                DS_TELEFONE         AS      Telefone,
-                                DS_CPF              AS      CPF,
+    let sql = `     SELECT   ID_USUARIO           AS      Id,
+                                NM_USUARIO        AS      Nome,
+                                DS_EMAIL          AS      Email,
+                                DS_TELEFONE       AS      Telefone,
+                                DS_CPF            AS      CPF,
                                 NM_CIDADE         AS      Nome_Cidade,
                                 NM_RUA            AS      Nome_Rua, 
                                 NR_NUMERO         AS      Numero,
-                                DS_IMG_PERFIL	  AS      ImageProfile
+                                DS_TIER           AS      Tier  
                             FROM USERS_TB 		  AS U_TB
                     INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
                                         ON  U_TB.ID_IMG = IMG_TB.ID_IMG
@@ -103,10 +104,11 @@ export async function Delete(id) {
     return resp.affectedRows
 };
 
-export async function InsertProfileImages(profile, id) {
-    const sql = ` UPDATE IMAGES_PERFIL_USER 
-            SET DS_IMG_PERFIL = ?
-                 WHERE ID_IMG = ?`;
-    const [resp] = await config.query(sql, [profile, id])
+export async function InsertProfileImages(Profile, Banner, Id) {
+    const sql = `UPDATE IMAGES_PERFIL_USER 
+                        SET DS_IMG_PERFIL = ?, 
+                            DS_BANNER     = ?
+                        WHERE ID_IMG      = ?;`;
+    const [resp] = await config.query(sql, [Profile, Banner, Id])
     return resp.affectedRows
 }; 
