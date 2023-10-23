@@ -4,13 +4,7 @@ import config from "./db_connection.js";
 export async function ListarCarrinho(id){
 
     let comando = 
-    `SELECT
-    ID_USUARIO, 
-    QTD_PRODUTO_CARRINHO, 
-    NM_PRODUTO,
-    VL_PRECO,
-    VL_PRECO_PROMOCIONAL,
-    BT_PROMOCAO
+    `SELECT *
     FROM CARRINHO_TB
     INNER JOIN PRODUTO_TB ON CARRINHO_TB.ID_PRODUTO = PRODUTO_TB.ID_PRODUTO
     WHERE ID_USUARIO = ?;
