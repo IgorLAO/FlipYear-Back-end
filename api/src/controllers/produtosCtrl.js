@@ -41,28 +41,22 @@ server.get('/outrosprodutos', async (req, resp) => {
     } catch (err) {
         resp.status(404).send({erro: err.message})
     }
-})
+});
 
 //pegar produto por id
 
 server.get('/produtos/:id', async (req, resp) =>{
 
     try{
-
         const { id } = req.params;
         let data = await ConsultarProdPorId(id);
         resp.send(data);
 
-
     }
-
     catch (err){
-
         resp.status(404).send({erro:err.message})
 
     }
-
-
 })
 
 
