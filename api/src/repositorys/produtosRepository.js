@@ -135,7 +135,7 @@ export async function ListDestProd(qtd, offset) {
     return resp;
 }
 
-<<<<<<< HEAD
+
 export async function ListAllDestProd(qtd, offset) {
     const sql = `			SELECT *
     FROM PRODUTO_TB 		AS P 
@@ -145,7 +145,7 @@ export async function ListAllDestProd(qtd, offset) {
 
     const [resp] = await config.query(sql, [qtd, offset])
     return resp;
-=======
+
 //Filtros
 
 
@@ -153,6 +153,4 @@ export async function FiltroFoda(filtro){
 
     const comando = `SELECT * FROM PRODUTO_TB
                     WHERE`
->>>>>>> f499e04ccfb319db30bc2a9be94d4ba7361e13cc
-}
-
+};
