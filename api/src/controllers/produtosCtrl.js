@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd, ListAllProd } from "../repositorys/produtosRepository.js";
+import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd, ListAllProd, ListAllDestProd } from "../repositorys/produtosRepository.js";
 
 let server = Router();
 //LISTAR
@@ -167,6 +167,20 @@ server.get('/produtosDestaque', async (req, resp) => {
         resp.status(400).send({
             erro: err.message
         })
+    }
+})
+
+//Listar todos os produtos em destaque
+server.get('/produtosAllDestaque', async (req, resp) =>{
+    try {
+        const getData = await ListAllDestProd()
+        if(getData.length <= 0)
+        throw new Error('Produto não encontrado.')
+        resp.send(getData);
+    } catch (err) {
+    resp.status(400).send({
+        erro:err.message
+    })
     }
 })
 

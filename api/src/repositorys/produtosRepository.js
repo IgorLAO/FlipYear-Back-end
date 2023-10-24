@@ -135,3 +135,14 @@ export async function ListDestProd(qtd, offset) {
     return resp;
 }
 
+export async function ListAllDestProd(qtd, offset) {
+    const sql = `			SELECT *
+    FROM PRODUTO_TB 		AS P 
+    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+    where bt_destaque = true
+    order by nm_produto`
+
+    const [resp] = await config.query(sql, [qtd, offset])
+    return resp;
+}
+

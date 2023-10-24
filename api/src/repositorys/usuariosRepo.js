@@ -1,7 +1,7 @@
 import { query } from "express";
 import config from "./db_connection.js";
 
-export async function getUsers(Tier) {
+export async function getUsers() {
     let sql = `	SELECT ID_USUARIO         AS      Id,
                         NM_USUARIO        AS      Nome,
                         DS_EMAIL          AS      Email,
@@ -15,9 +15,8 @@ export async function getUsers(Tier) {
             FROM USERS_TB 				  AS U_TB
             INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
                                           ON  U_TB.ID_IMG = IMG_TB.ID_IMG 
-                      FROM USERS_TB	      AS C_TB
                 INNER JOIN ENDERECO_TB    AS E_TB 
-                                        ON E_TB.ID_ENDERECO= C_TB.ID_ENDERECO`;
+                                        ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO`;
     let [resp] = await config.query(sql)
     return resp
 };
