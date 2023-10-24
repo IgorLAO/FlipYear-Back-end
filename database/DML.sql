@@ -22,9 +22,6 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)
                  WHERE ID_IMG = '1';
 
 
-		INSERT INTO COMENTARIOS_TB (ID_USUARIO, DS_COMENTARIO, DT_COMENTARIO, QTD_LIKES, BT_DENUNCIA)
-						VALUES (1, 'Produto veio amassado, não gostei!! NÃO RECOMENDO!!!!', '2020-05-23', 24, 0); 
-                               
 	SELECT * 
 		FROM USERS_TB 				  AS U_TB
         INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
@@ -46,6 +43,10 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)
 			WHERE   DS_EMAIL      = 'rogerio@gmail.com'
 			AND     DS_SENHA      = '123aa4';
             
+            
+		INSERT INTO COMENTARIOS_TB (ID_USUARIO, DS_COMENTARIO, DT_COMENTARIO, QTD_LIKES, BT_DENUNCIA)
+						VALUES (1, 'Produto veio amassado, não gostei!! NÃO RECOMENDO!!!!', '2020-05-23', 24, 0); 
+                               
             -- -------
             SELECT *
                          FROM USERS_TB
@@ -68,7 +69,7 @@ INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)
 				FROM PRODUTO_TB;
             
 			INSERT INTO CATEGORIA_TB (NM_CATEGORIA)
-									 VALUES("OIII");
+									 VALUES("receba carai");
 -- ---------------------
 
   -- ----									 
