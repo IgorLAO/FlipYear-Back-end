@@ -135,3 +135,12 @@ export async function ListDestProd(qtd, offset) {
     return resp;
 }
 
+//Filtros
+
+
+export async function FiltroFoda(filtro){
+
+    const comando = `SELECT * FROM PRODUTO_TB
+                    WHERE`
+}
+
