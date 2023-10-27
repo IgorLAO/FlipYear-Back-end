@@ -87,7 +87,7 @@ server.post('/usuarios/login', async (req, resp) => {
     }
 });
 
-server.put('/usuario/:id/images', upload.fields([{name:'profile', maxCount: 1}, {name: 'banner', maxCount: 1}]), async (req, resp) => {
+server.put('/usuario/:id/image', upload.fields([{name:'profile', maxCount: 1}, {name: 'banner', maxCount: 1}]), async (req, resp) => {
     try {
         const profilePic = req.files['profile'][0].path;
         const bannerPic = req.files['banner'][0].path;

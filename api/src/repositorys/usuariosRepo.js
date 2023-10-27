@@ -105,9 +105,9 @@ export async function Delete(id) {
 
 export async function InsertProfileImages(Profile, Banner, Id) {
     const sql = `UPDATE IMAGES_PERFIL_USER 
-                        SET DS_IMG_PERFIL = ?, 
+                        SET DS_IMG_PERFIL = ?,
                             DS_BANNER     = ?
-                        WHERE ID_IMG      = ?;`;
+                        WHERE ID_IMG      = ?`;
     const [resp] = await config.query(sql, [Profile, Banner, Id])
     return resp.affectedRows
 }; 
