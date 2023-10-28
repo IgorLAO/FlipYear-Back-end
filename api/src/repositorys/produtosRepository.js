@@ -99,12 +99,12 @@ export async function AlterarProduto(id, produto) {
             UPDATE PRODUTO_TB
             SET 	NM_PRODUTO					=?,
                     VL_PRECO					=?,
-                    VL_PRECO_PROMOCIONA			=?,
+                    VL_PRECO_PROMOCIONAL		=?,
                     BT_DESTAQUE					=?,
-                    BT_PRMOCAO					=?,
+                    BT_PROMOCAO					=?,
                     BT_DISPONIVEL				=?,
                     QTD_ESTOQUE					=?,
-                    DS_DETALHES					=?,
+                    DS_DETALHES					=?
             WHERE ID_PRODUTO				=? `
 
     const [resp] = await config.query(comando, [

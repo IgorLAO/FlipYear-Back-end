@@ -63,7 +63,7 @@ INSERT INTO IMAGES_USER (DS_IMG_PERFIL)
 									 
 		-- PRODUTOS
 			INSERT INTO PRODUTO_TB (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
-									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira", 9.5, 'HASBRO', 'VELHO' );
+									VALUES(1, "Madeira", 15.00, 0.00, false, true, false, 150, "madeira de boa qualidade madeira boa hein madeira", 9.5, 'HASBRO', 'VELHO',TRUE );
 			
             SELECT *
 				FROM PRODUTO_TB;

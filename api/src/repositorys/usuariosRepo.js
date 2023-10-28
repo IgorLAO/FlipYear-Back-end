@@ -98,6 +98,7 @@ export async function Delete(id) {
     return resp.affectedRows
 };
 
+
 export async function AlterImage(imagem, id) {
     console.log(1);
     const sql = `  UPDATE IMAGES_USER 

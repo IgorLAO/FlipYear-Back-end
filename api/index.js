@@ -20,7 +20,6 @@ server.listen(process.env.PORT,() => console.log(`
         API ONLINE NA PORTA ${process.env.PORT}
 `));
 
-
 server.use(usuarioController);
 server.use(produtosCtrl);
 server.use(enderecosCtrls);
