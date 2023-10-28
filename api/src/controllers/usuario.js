@@ -1,6 +1,6 @@
 import multer from "multer";
 import { Router } from "express";
-import { Delete, GetUserById, InsertClientes, InsertProfileImages, Login, SearchUser, getUsers } from "../repositorys/usuariosRepo.js";
+import { AlterImage, Delete, GetUserById, InsertClientes, Login, SearchUser, getUsers } from "../repositorys/usuariosRepo.js";
 import { getADM } from "../repositorys/ADM.js";
 
 
@@ -87,17 +87,18 @@ server.post('/usuarios/login', async (req, resp) => {
     }
 });
 
-server.put('/usuario/:id/images', upload.fields([{name:'profile', maxCount: 1}, {name: 'banner', maxCount: 1}]), async (req, resp) => {
+server.put('/usuario/:id/ProfImage', upload.single('profile'), async (req, resp) => {
     try {
-        const profilePic = req.files['profile'][0].path;
-        const bannerPic = req.files['banner'][0].path;
-        const { id } = req.params;  
-        const respN = await InsertProfileImages(profilePic, bannerPic, id);
-        resp.status(204).send();
-    } catch (error) {
-        resp.status(502).send();
-    }
+        const { id } = req.params;
 
+        const imagem = req.file.path;
+        console.log(imagem)
+
+        const data = await AlterImage(imagem, id);
+        resp.status(200).send();
+    } catch (err) {
+        resp.status(502).send({ error: err.message });
+    }
 });
 
 server.get('/usuarios/busca', async (req, resp) => {
@@ -123,12 +124,12 @@ server.delete('/usuario/:id', async (req, resp) => {
         let res = Delete(id);
 
         if (resp === 0)
-            throw new Error("Não pode ser excluído")
+            throw new Error("Não pode ser excluído");
 
         resp.send(res);
 
     } catch (err) {
-        resp.status(405).send({ erro: err.message })
+        resp.status(405).send({ erro: err.message });
     }
 })
 

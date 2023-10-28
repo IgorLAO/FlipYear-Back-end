@@ -11,14 +11,14 @@ INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_E
 								(1, 6, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
 								(1, 7, "David", "0", 0, "david.admin", "123", 'ADM'   );
                                 
-INSERT INTO IMAGES_PERFIL_USER (DS_IMG_PERFIL, DS_BANNER)	
-							VALUES('/storage/images/profile', '/storage/images/banner');	
+INSERT INTO IMAGES_USER (DS_IMG_PERFIL)	
+							VALUES('/storage/images/profile');	
                             
                                SELECT *
-                               FROM USERS_TB;
+                               FROM IMAGES_USER;
 
- UPDATE IMAGES_PERFIL_USER 
-            SET DS_IMG_PERFIL = '1321', DS_BANNER = '1212'
+ UPDATE IMAGES_USER 
+            SET DS_IMG_PERFIL = '1321'
                  WHERE ID_IMG = '1';
 
 

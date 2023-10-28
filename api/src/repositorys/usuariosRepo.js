@@ -10,11 +10,8 @@ export async function getUsers() {
                         NM_CIDADE         AS      Nome_Cidade,
                         NM_RUA            AS      Nome_Rua,
                         NR_NUMERO         AS      Numero ,
-                        DS_IMG_PERFIL	  AS      ImageProfile,
-                        DS_BANNER         AS      ImageBanner
+                        DS_IMG_PERFIL	  AS      ImageProfile
             FROM USERS_TB 				  AS U_TB
-            INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
-                                          ON  U_TB.ID_IMG = IMG_TB.ID_IMG 
                 INNER JOIN ENDERECO_TB    AS E_TB 
                                         ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO`;
     let [resp] = await config.query(sql)
@@ -31,10 +28,9 @@ export async function GetUserById(id) {
                     NM_CIDADE         AS      Nome_Cidade,
                     NM_RUA            AS      Nome_Rua,
                     NR_NUMERO         AS      Numero,
-                    DS_IMG_PERFIL	  AS      ImageProfile,
-                    DS_BANNER         AS      ImageBanner
+                    DS_IMG_PERFIL	  AS      ImageProfile
 		FROM USERS_TB 				  AS U_TB
-        INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
+        INNER JOIN IMAGES_USER AS IMG_TB
 									  ON  U_TB.ID_IMG = IMG_TB.ID_IMG
 		INNER JOIN ENDERECO_TB 		  AS E_TB 
 									  ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
@@ -48,13 +44,13 @@ export async function InsertClientes(C) {
     let sql = `INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
                                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    let [resp] = await config.query(sql, [C.Id_endereco,
-    C.Nome,
-    C.Telefone,
-    C.CPF,
-    C.Email,
-    C.Senha,
-    C.Tier]);
+    let [resp] = await config.query(sql, [      C.Id_endereco,
+                                            C.Nome,
+                                            C.Telefone,
+                                            C.CPF,
+                                            C.Email,
+                                            C.Senha,
+                                            C.Tier]);
 
     return resp
 };
@@ -70,8 +66,7 @@ export async function Login(Email, Senha) {
                                 NR_NUMERO         AS      Numero,
                                 DS_TIER           AS      Tier  
                             FROM USERS_TB 		  AS U_TB
-                    INNER JOIN IMAGES_PERFIL_USER AS IMG_TB
-                                        ON  U_TB.ID_IMG = IMG_TB.ID_IMG
+                    
                     INNER JOIN ENDERECO_TB 		  AS E_TB 
                                         ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
         WHERE DS_EMAIL = ?
@@ -103,11 +98,14 @@ export async function Delete(id) {
     return resp.affectedRows
 };
 
-export async function InsertProfileImages(Profile, Banner, Id) {
-    const sql = `UPDATE IMAGES_PERFIL_USER 
-                        SET DS_IMG_PERFIL = ?, 
-                            DS_BANNER     = ?
-                        WHERE ID_IMG      = ?;`;
-    const [resp] = await config.query(sql, [Profile, Banner, Id])
-    return resp.affectedRows
-}; 
+export async function AlterImage(imagem, id) {
+    console.log(1);
+    const sql = `  UPDATE IMAGES_USER 
+                SET DS_IMG_PERFIL = ?
+                    WHERE ID_IMG  = ?`;
+    console.log(2);
+    const [res] = await config.query(sql, [imagem, id]);
+    console.log(3);
+
+    return res.affectedRows;
+}
