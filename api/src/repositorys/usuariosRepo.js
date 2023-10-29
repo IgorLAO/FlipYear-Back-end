@@ -66,7 +66,6 @@ export async function Login(Email, Senha) {
                                 NR_NUMERO         AS      Numero,
                                 DS_TIER           AS      Tier  
                             FROM USERS_TB 		  AS U_TB
-                    
                     INNER JOIN ENDERECO_TB 		  AS E_TB 
                                         ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
         WHERE DS_EMAIL = ?
