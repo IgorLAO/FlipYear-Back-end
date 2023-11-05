@@ -6,8 +6,8 @@ const server = Router();
 server.get('/pedidos', async (req, resp) => {
     try {
         const data = await ListPedido();
-        
-        resp.status(200).send(data)       
+
+        resp.status(200).send(data)
     } catch (err) {
         resp.status(502).send({ Error: err.message });
     }
@@ -15,11 +15,15 @@ server.get('/pedidos', async (req, resp) => {
 
 server.put('/pedidos/:id', async (req, resp) => {
     try {
+        let insertId = req.params.id;
         let situacao = req.body;
-        let { id } = req.params;
-        let data = await UpdtPedido(situacao, id);
 
-        resp.status(200).send();
+        console.log(situacao);
+
+        let data = await UpdtPedido(situacao, insertId);
+        console.log(data);
+
+        resp.status(200).send(data);
     } catch (err) {
         resp.status(502).send({ error: err.message });
     }

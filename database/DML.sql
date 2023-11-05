@@ -46,11 +46,11 @@
 		INSERT INTO FORMA_PAG(NM_FORMA_PAG)
 					VALUES('CREDITO');
 				
-        
 		-- SELEÇÕES --
 
 		-- Seleção de Imagens de Perfil
 		SELECT * FROM IMAGES_USER;
+        
 
 		-- Join de Usuários, Imagens de Perfil e Endereços
 		SELECT
@@ -60,6 +60,7 @@
 		FROM USERS_TB AS U_TB
 		INNER JOIN ENDERECO_TB AS E_TB ON E_TB.ID_ENDERECO = U_TB.ID_ENDERECO;
 
+
 		-- Seleção de Usuários por Email e Senha
 		SELECT
 			ID_USUARIO,
@@ -67,15 +68,20 @@
 			DS_EMAIL AS Email
 		FROM USERS_TB
 		WHERE DS_EMAIL = 'rogerio@gmail.com' AND DS_SENHA = '123aa4';
-
+        
+        
 		-- Seleção de Usuários por Nome, CPF ou Email
 		SELECT *
 		FROM USERS_TB
 		WHERE NM_USUARIO LIKE "%rogerio%" OR DS_CPF LIKE "%rogerio%" OR DS_EMAIL LIKE "%rogerio%";
+        
+        
 
 		-- Seleçoes pedidos
 			SELECT *
-				FROM PEDIDO_TB;
+				FROM PEDIDO_TB		   AS P_TB
+                INNER JOIN ENDERECO_TB AS E_TB ON E_TB.ID_ENDERECO = P_TB.ID_ENDERECO
+                INNER JOIN FORMA_PAG AS FP ON FP.ID_FORMA_PAG = P_TB.ID_FORMA_PAG;
 
 
 
@@ -89,11 +95,11 @@
 
 		-- Updt situação
 		UPDATE PEDIDO_TB
-			SET DS_SITUACAO = 'GRACAAS A DEUS PAI'
-		WHERE ID_PEDIDO = 40;
-
 
 		-- EXCLUSÃO --
+
+			SET DS_SITUACAO = 'GRACAAS A DEUS PAI'
+		WHERE ID_PEDIDO = 4;
 
 		-- Exclusão de Produto
 		DELETE FROM TB_PRODUTO
