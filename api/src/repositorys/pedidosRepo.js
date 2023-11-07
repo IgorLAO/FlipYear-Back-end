@@ -23,4 +23,5 @@ export async function UpdtPedido(situacao, id){
 
     let [resp] = await config.query(sql, [situacao, id]);
     return resp
+
 }

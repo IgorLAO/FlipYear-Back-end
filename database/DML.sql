@@ -2,6 +2,43 @@
 
 		-- Perfil Clientes
 
+
+-- PERFIL CLIENTES 
+INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
+						VALUES  (1, 1, "Usuario Totalmente Normal", "0", 0, "NORMAL2", "1234", 'NORMAL_USERS'),
+								(1, 2, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
+								(1, 3, "JOAO", "0", 0, "joao.admin", "123", 'ADM'    ),
+								(1, 4, "Igor", "0", 0, "igor.admin", "123", 'ADM'    ),
+								(1, 5, "Italo", "0", 0, "italo.admin", "123", 'ADM'  ),
+								(1, 6, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
+								(1, 7, "David", "0", 0, "david.admin", "123", 'ADM'   );
+                                
+INSERT INTO IMAGES_USER (DS_IMG_PERFIL)	
+							VALUES('/storage/images/profile');	
+                            
+                               SELECT *
+                               FROM IMAGES_USER;
+                               
+                               SELECT *
+									FROM PEDIDO_TB		as P
+                                    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA;
+                               	
+
+
+INSERT INTO CATEGORIA_TB(NM_CATEGORIA)
+			VALUES ('Jogo'),
+				   ('Console'),
+                   ('Fliperama'),
+                   ('Items Colecionaveis');
+
+TRUNCATE TABLE CATEGORIA_TB;
+
+
+INSERT INTO FORMA_PAG (NM_FORMA_PAG)
+					  VALUES ('CREDITO'),
+							 ('DEBITO'),
+							 ('PIX');
+
 		INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL, DS_SENHA, DS_TIER)
 		VALUES  
 			(1, 1, "Usuario Totalmente Normal", "0", 0, "NORMAL2", "1234", 'NORMAL_USERS'),
@@ -11,6 +48,7 @@
 			(1, 5, "Italo", "0", 0, "italo.admin", "123", 'ADM'),
 			(1, 6, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
 			(1, 7, "David", "0", 0, "david.admin", "123", 'ADM');
+
 
 		INSERT INTO IMAGES_USER (DS_IMG_PERFIL)
 		VALUES('/storage/images/profile');
