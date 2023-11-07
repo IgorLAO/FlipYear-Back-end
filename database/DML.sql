@@ -16,6 +16,26 @@ INSERT INTO IMAGES_USER (DS_IMG_PERFIL)
                             
                                SELECT *
                                FROM IMAGES_USER;
+                               
+                               SELECT *
+									FROM PEDIDO_TB		as P
+                                    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA;
+                               	
+
+
+INSERT INTO CATEGORIA_TB(NM_CATEGORIA)
+			VALUES ('Jogo'),
+				   ('Console'),
+                   ('Fliperama'),
+                   ('Items Colecionaveis');
+
+TRUNCATE TABLE CATEGORIA_TB;
+
+
+INSERT INTO FORMA_PAG (NM_FORMA_PAG)
+					  VALUES ('CREDITO'),
+							 ('DEBITO'),
+							 ('PIX');
 
  UPDATE IMAGES_USER 
             SET DS_IMG_PERFIL = '1321'
