@@ -104,3 +104,10 @@
 		-- Exclusão de Produto
 		DELETE FROM TB_PRODUTO
 		WHERE ID_PRODUTO = ?;
+
+
+		--Alterar imagem do produto
+
+    update PRODUTO_TB
+		SET IMAGEM_PRODUTO_TB	= 1
+        WHERE ID_PRODUTO = 1 ;

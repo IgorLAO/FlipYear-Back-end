@@ -146,10 +146,19 @@ export async function ListAllDestProd(qtd, offset) {
     const [resp] = await config.query(sql, [qtd, offset])
     return resp;
 
-//Filtros
+    //Filtros
 }
 
-export async function FiltroFoda(filtro){
+export async function FiltroFoda(filtro) {
     const comando = `SELECT * FROM PRODUTO_TB
                     WHERE`
 };
+export async function AlterarImagem(imagem, id) {
+    const comando = `
+    update PRODUTO_TB
+        SET IMAGEM_PRODUTO_TB	= ?
+            WHERE ID_PRODUTO    = ? `
+
+    const [resp] = await config.query(comando, [imagem, id]);
+    return resp.affectedRows;
+}

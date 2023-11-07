@@ -1,7 +1,12 @@
+import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd, ListAllProd, ListAllDestProd, AlterarImagem } from "../repositorys/produtosRepository.js";
+
 import { Router } from "express";
-import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd, ListAllProd, ListAllDestProd } from "../repositorys/produtosRepository.js";
+import multer from 'multer';
 
 let server = Router();
+const upload = multer({dest: 'storage/produtos'});
+
+
 //LISTAR
 server.get('/produtos', async (req, resp) => {
     try {
@@ -164,6 +169,26 @@ server.get('/produtosDestaque', async (req, resp) => {
             throw new Error('Produto não encontrado.')
             resp.send(getData);
     } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+});
+
+//enviar Imagem produto
+server.put('/produtos/:id/imagem', upload.single('CapaProduto') ,async (req,resp) => {
+    try {
+        const { id } = req.params;
+
+        const imagem = req.file.path;
+
+        const resposta = await AlterarImagem(imagem, id);
+        resp.status(204).send()
+        
+        if(resposta != 1){
+            throw new Error("Imagem não pode ser salva ):");
+        }
+    } catch (err){
         resp.status(400).send({
             erro: err.message
         })
