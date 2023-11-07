@@ -9,8 +9,7 @@ export async function getUsers() {
                         DS_CPF            AS      CPF,
                         NM_CIDADE         AS      Nome_Cidade,
                         NM_RUA            AS      Nome_Rua,
-                        NR_NUMERO         AS      Numero ,
-                        DS_IMG_PERFIL	  AS      ImageProfile
+                        NR_NUMERO         AS      Numero 
             FROM USERS_TB 				  AS U_TB
                 INNER JOIN ENDERECO_TB    AS E_TB 
                                         ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO`;
@@ -81,18 +80,17 @@ export async function SearchUser(search) {
                 WHERE NM_USUARIO  LIKE ? 
                       OR DS_CPF   LIKE ?
                       OR DS_EMAIL LIKE ?`
-    let [resp] = await config.query(sql, ['%' + search + '%',
-    '%' + search + '%',
-    '%' + search + '%']);
-    console.log(resp);
-
+    let [resp] = await config.query(sql, [  '%' + search + '%',
+                                            '%' + search + '%',
+                                            '%' + search + '%']);
+                                            console.log(resp);
     return resp
 };
 
 export async function Delete(id) {
     let sql = `DELETE FROM USERS_TB
                       WHERE ID_USUARIO = ?`;
-    let [resp] = await config.query(sql, [id])
+    let [resp] = await config.query(sql, [id]);
 
     return resp.affectedRows
 };

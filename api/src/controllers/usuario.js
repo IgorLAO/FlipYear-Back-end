@@ -97,7 +97,7 @@ server.put('/usuario/:id/ProfImage', upload.single('profile'), async (req, resp)
         const data = await AlterImage(imagem, id);
         resp.status(200).send();
     } catch (err) {
-        resp.status(502).send({ error: err.message });
+        resp.status(502).send({ erro: err.message });
     }
 });
 
