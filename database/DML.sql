@@ -2,43 +2,6 @@
 
 		-- Perfil Clientes
 
-
--- PERFIL CLIENTES 
-INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-						VALUES  (1, 1, "Usuario Totalmente Normal", "0", 0, "NORMAL2", "1234", 'NORMAL_USERS'),
-								(1, 2, "Usuario Totalmente Normal", "0", 0, "NORMAL", "123", 'NORMAL_USERS'),
-								(1, 3, "JOAO", "0", 0, "joao.admin", "123", 'ADM'    ),
-								(1, 4, "Igor", "0", 0, "igor.admin", "123", 'ADM'    ),
-								(1, 5, "Italo", "0", 0, "italo.admin", "123", 'ADM'  ),
-								(1, 6, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
-								(1, 7, "David", "0", 0, "david.admin", "123", 'ADM'   );
-                                
-INSERT INTO IMAGES_USER (DS_IMG_PERFIL)	
-							VALUES('/storage/images/profile');	
-                            
-                               SELECT *
-                               FROM IMAGES_USER;
-                               
-                               SELECT *
-									FROM PEDIDO_TB		as P
-                                    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA;
-                               	
-
-
-INSERT INTO CATEGORIA_TB(NM_CATEGORIA)
-			VALUES ('Jogo'),
-				   ('Console'),
-                   ('Fliperama'),
-                   ('Items Colecionaveis');
-
-TRUNCATE TABLE CATEGORIA_TB;
-
-
-INSERT INTO FORMA_PAG (NM_FORMA_PAG)
-					  VALUES ('CREDITO'),
-							 ('DEBITO'),
-							 ('PIX');
-
 		INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL, DS_SENHA, DS_TIER)
 		VALUES  
 			(1, 1, "Usuario Totalmente Normal", "0", 0, "NORMAL2", "1234", 'NORMAL_USERS'),
@@ -48,7 +11,6 @@ INSERT INTO FORMA_PAG (NM_FORMA_PAG)
 			(1, 5, "Italo", "0", 0, "italo.admin", "123", 'ADM'),
 			(1, 6, "Denzel", "0", 0, "denzel.admin", "123", 'ADM'),
 			(1, 7, "David", "0", 0, "david.admin", "123", 'ADM');
-
 
 		INSERT INTO IMAGES_USER (DS_IMG_PERFIL)
 		VALUES('/storage/images/profile');
@@ -71,18 +33,24 @@ INSERT INTO FORMA_PAG (NM_FORMA_PAG)
 
 
 		-- PEDIDOS
-		INSERT INTO PEDIDO_TB (ID_USUARIO, ID_ENDERECO, ID_FORMA_PAG, NM_PEDIDO, DS_NOTA_FISCAL, QTD_PARCELAS, DT_PEDIDO, DS_SITUACAO)
+		INSERT INTO PEDIDO_TB (ID_USUARIO, ID_CATEGORIA, ID_ENDERECO, ID_FORMA_PAG, NM_PEDIDO, DS_NOTA_FISCAL, QTD_PARCELAS, DT_PEDIDO, DS_SITUACAO)
 						VALUES 
-							(1, 1, 1, 'NINTENDO','NF1234', 3, '2023-11-03 12:34:56', 'Em processamento'),
-							(2, 2, 2, 'PLAY3', 'NF5678', 2, '2023-11-04 10:00:00', 'Enviado'),
-							(3, 3, 3, 'CARA DA LUVA', 'NF91011', 4, '2023-11-05 14:30:00', 'Entregue'),
-							(4, 4, 4, 'RECEBA', 'NF121314', 1, '2023-11-06 16:45:00', 'Cancelado'),
-							(5, 5, 5, 'KILL A GODS COMMAND', 'NF151617', 3, '2023-11-07 09:15:00', 'Em processamento'),
-							(6, 6, 6, 'HOLLY WARSS', 'NF181920', 2, '2023-11-08 11:20:00', 'Enviado'),
-							(7, 7, 7, 'UPHOLD THE LAW', 'NF212223', 4, '2023-11-09 13:40:00', 'Entregue');
+							(1, 1, 1, 1, 'NINTENDO','NF1234', 3, '2023-11-03 12:34:56', 'Em processamento'),
+							(2, 2, 2, 1, 'PLAY3', 'NF5678', 2, '2023-11-04 10:00:00', 'Enviado'),
+							(3, 3, 3, 2,'CARA DA LUVA', 'NF91011', 4, '2023-11-05 14:30:00', 'Entregue'),
+							(4, 4, 4, 3,'RECEBA', 'NF121314', 1, '2023-11-06 16:45:00', 'Cancelado'),
+							(5, 5, 5, 1, 'KILL A GODS COMMAND', 'NF151617', 3, '2023-11-07 09:15:00', 'Em processamento'),
+							(6, 6, 6, 3, 'HOLLY WARSS', 'NF181920', 2, '2023-11-08 11:20:00', 'Enviado'),
+							(7, 7, 7, 2, 'UPHOLD THE LAW', 'NF212223', 4, '2023-11-09 13:40:00', 'Entregue');
                             
-		INSERT INTO FORMA_PAG(NM_FORMA_PAG)
+		INSERT INTO FORMA_PAG (NM_FORMA_PAG)
 					VALUES('CREDITO');
+                    
+		insert into CATEGORIA_TB (NM_CATEGORIA)
+								 VALUES ('Jogo'),
+										('Console'),
+                                        ('Fliperama'),
+                                        ('Items Colecionaveis');
 				
 		-- SELEÇÕES --
 
@@ -121,7 +89,7 @@ INSERT INTO FORMA_PAG (NM_FORMA_PAG)
                 INNER JOIN ENDERECO_TB AS E_TB ON E_TB.ID_ENDERECO = P_TB.ID_ENDERECO
                 INNER JOIN FORMA_PAG AS FP ON FP.ID_FORMA_PAG = P_TB.ID_FORMA_PAG;
 
-
+		
 
 
 		-- ATUALIZAÇÕES --
@@ -142,10 +110,3 @@ INSERT INTO FORMA_PAG (NM_FORMA_PAG)
 		-- Exclusão de Produto
 		DELETE FROM TB_PRODUTO
 		WHERE ID_PRODUTO = ?;
-
-
-		--Alterar imagem do produto
-
-    update PRODUTO_TB
-		SET IMAGEM_PRODUTO_TB	= 1
-        WHERE ID_PRODUTO = 1 ;

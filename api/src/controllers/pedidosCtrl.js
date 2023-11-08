@@ -5,7 +5,7 @@ const server = Router();
 
 server.get('/pedidos', async (req, resp) => {
     try {
-        const data = await ListPedido();
+        const data = await ListPedido(  );
 
         resp.status(200).send(data)
     } catch (err) {
