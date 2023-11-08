@@ -1,13 +1,25 @@
 import { Router } from "express";
-import { ListPedido, UpdtPedido } from "../repositorys/pedidosRepo.js";
+import { ListPedido, ListPedidoInterval, UpdtPedido } from "../repositorys/pedidosRepo.js";
 
 const server = Router();
 
 server.get('/pedidos', async (req, resp) => {
     try {
-        const data = await ListPedido(  );
+        const data = await ListPedido();
 
         resp.status(200).send(data)
+    } catch (err) {
+        resp.status(502).send({ Error: err.message });
+    }
+});
+
+server.get('/pedidosInterval', async (req, resp) => {
+    try {
+        let Start = req.body
+        let End = req.body
+        const data = await ListPedidoInterval(Start, End);
+
+        resp.status(200).send(data);
     } catch (err) {
         resp.status(502).send({ Error: err.message });
     }
