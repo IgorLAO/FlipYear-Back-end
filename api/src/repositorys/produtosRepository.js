@@ -27,7 +27,6 @@ export async function InsertProdutos(produto) {
 
     const [linhas] = await config.query(resp, [
         produto.categoria,
-        produto.img,
         produto.nome,
         produto.preco,
         produto.precoPromocao,
@@ -153,12 +152,25 @@ export async function FiltroFoda(filtro) {
     const comando = `SELECT * FROM PRODUTO_TB
                     WHERE`
 };
+
 export async function AlterarImagem(imagem, id) {
     const comando = `
-    update PRODUTO_TB
-        SET IMAGEM_PRODUTO_TB	= ?
-            WHERE ID_PRODUTO    = ? `
+        update IMAGEM_PRODUTO_TB
+            SET IMG_PRODUTO = ?
+                WHERE ID_PRODUTO = ?`
 
     const [resp] = await config.query(comando, [imagem, id]);
     return resp.affectedRows;
+}
+
+export async function inserirImagemProduto(imagem){
+    const comando = `
+    INSERT INTO IMAGEM_PRODUTO_TB (ID_PRODUTO,IMG_PRODUTO)
+        VALUES( ?, ?);
+    `
+    const [resposta] = await config.query(comando, [
+        imagem.produto,
+        imagem.imagem
+    ]);
+    return resposta[0];
 }
