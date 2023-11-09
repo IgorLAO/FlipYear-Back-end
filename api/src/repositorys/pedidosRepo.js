@@ -33,7 +33,6 @@ export async function ListPedidoInterval(Start, End) {
                  FROM PEDIDO_TB		    AS P
                 INNER JOIN CATEGORIA_TB	AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
                 WHERE DT_PEDIDO BETWEEN ? AND ?`;
-
     let [resp] = await config.query(sql, [Start, End]);
     return resp
 }
