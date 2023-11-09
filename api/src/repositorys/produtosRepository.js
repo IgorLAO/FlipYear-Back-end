@@ -23,7 +23,7 @@ export async function ListAllProd() {
 export async function InsertProdutos(produto) {
     const resp = `
     INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
-       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) `
+       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) `
 
     const [linhas] = await config.query(resp, [
         produto.categoria,
