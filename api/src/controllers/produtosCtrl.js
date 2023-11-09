@@ -1,4 +1,4 @@
-import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd, ListAllProd, ListAllDestProd, AlterarImagem } from "../repositorys/produtosRepository.js";
+import { AlterarProduto, InsertProdutos, ListProd, RemoverProdutos, ConsultarProdPorId, SearchProd, ListDestProd, ListAllProd, ListAllDestProd, AlterarImagem, inserirImagemProduto } from "../repositorys/produtosRepository.js";
 
 import { Router } from "express";
 import multer from 'multer';
@@ -175,7 +175,22 @@ server.get('/produtosDestaque', async (req, resp) => {
     }
 });
 
-//enviar Imagem produto
+
+server.post('/produtos/:id/imagem', async (req, resp) =>{
+    try {
+        const { id } = req.params;
+        const imagem = await inserirImagemProduto(id);
+        resp.send(imagem);
+
+        
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+//Alterar imagem produto
 server.put('/produtos/:id/imagem', upload.single('CapaProduto') ,async (req,resp) => {
     try {
         const { id } = req.params;
