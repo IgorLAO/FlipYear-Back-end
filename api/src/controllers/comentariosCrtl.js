@@ -21,6 +21,22 @@ server.get('/comentarios', async (req, resp) =>{
     }
 })
 
+server.get('/AllComentarios', async (req, resp)=>{
+    try {
+        const qtd = 1000
+        const offset = 0
+        const resposta = await ListComments(qtd, offset)
+        if(resposta.length <= 0)
+        throw new Error('Não encontrado')
+    resp.send(resposta);
+    } catch (err) {
+    resp.status(400).send({
+        erro:err.message
+    })
+    }
+})
+
+
 //Deletar algum comentário
 server.delete('/comentarios/:id', async (req, resp) =>{
     try {
