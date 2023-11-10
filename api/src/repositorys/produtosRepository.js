@@ -23,15 +23,11 @@ export async function ListAllProd() {
 export async function InsertProdutos(produto) {
     const resp = `
 
-    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, ID_IMAGEM_PRODUTO, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
-       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) `
-
-    INSERT INTO PRODUTO_TB  (ID_CATEGORIA, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
-       VALUES(? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) `
+    INSERT INTO PRODUTO_TB  (ID_CATEGORIA,  NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
+       VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) `
 
     const [linhas] = await config.query(resp, [
         produto.categoria,
-        produto.imagem,
         produto.nome,
         produto.preco,
         produto.precoPromocao,
@@ -166,4 +162,13 @@ export async function AlterarImagem(imagem, id) {
 
     const [resp] = await config.query(comando, [imagem, id]);
     return resp.affectedRows;
+}
+
+export async function InserirImagem(){
+    const comando = `
+        insert into IMAGEM_PRODUTO_TB(ID_PRODUTO, IMG_PRODUTO)
+            VALUES(?,?)
+    `
+    const [resp] = await config.query(comando, [id, imagem]);
+    return resp[0];
 }
