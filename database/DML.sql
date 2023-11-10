@@ -69,7 +69,11 @@ INSERT INTO IMAGES_USER (DS_IMG_PERFIL)
 				FROM PRODUTO_TB;
             
 			INSERT INTO CATEGORIA_TB (NM_CATEGORIA)
-									 VALUES("receba carai");
+									 VALUES("Jogos de CD"),
+									 		("Jogos de Fita"),
+											("Consoles"),
+											("Fliperama");
+
 -- ---------------------
 
   -- ----									 
