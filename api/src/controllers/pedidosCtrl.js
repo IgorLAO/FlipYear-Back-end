@@ -15,9 +15,10 @@ server.get('/pedidos', async (req, resp) => {
 
 server.get('/pedidosInterval', async (req, resp) => {
     try {
-        let Start = req.body
-        let End = req.body
+        let { Start, End } = req.query
+
         const data = await ListPedidoInterval(Start, End);
+        console.log(data)
 
         resp.status(200).send(data);
     } catch (err) {
