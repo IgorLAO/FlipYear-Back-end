@@ -10,6 +10,11 @@ export async function ListEnderecos(){
 export async function InsertEnderecos(E) {
     let sql = `INSERT INTO ENDERECO_TB (DS_CEP, NM_CIDADE, NM_RUA, DS_COMPLEMENTO, NR_NUMERO)
                                         VALUES(?, ?, ?, ?, ?)`;
-    let [resp] = await config.query(sql, [E.CEP, E.Cidade, E.Rua, E.Complemento, E.Numero])
+    let [resp] = await config.query(sql, [  E.CEP, 
+                                            E.Cidade, 
+                                            E.Rua, 
+                                            E.Complemento, 
+                                            E.Numero,
+                                        ]);
     return [resp]
 }

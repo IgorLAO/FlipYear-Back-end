@@ -22,8 +22,8 @@ server.post("/enderecos", async (req, resp) => {
           throw new Error("Digite um numero");
 
         let data = await InsertEnderecos(bodyReq);
-        resp.send(data)
 
+        resp.send(data)
       } catch (err) {
         resp.send(err.message)
       };

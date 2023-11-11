@@ -41,18 +41,30 @@ export async function GetUserById(id) {
 
 export async function InsertClientes(C) {
     let sql = `INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
-                                    VALUES (?, ?, ?, ?, ?, ?, ?)`;
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    let [resp] = await config.query(sql, [      C.Id_endereco,
-                                            C.Nome,
-                                            C.Telefone,
-                                            C.CPF,
-                                            C.Email,
-                                            C.Senha,
-                                            C.Tier]);
+    let [resp] = await config.query(sql, [ C.Id_endereco,
+                                           C.Id_img,
+                                           C.Nome,
+                                           C.Telefone,
+                                           C.CPF,
+                                           C.Email,
+                                           C.Senha,
+                                           C.Tier]);
 
     return resp
 };
+
+
+export async function GetImages() {
+    let sql = `SELECT ID_IMG AS Id, 
+                    DS_IMG_PERFIL AS NameImg
+                FROM IMAGES_USER`;
+
+    const [resp] = await config.query(sql, []);
+    return resp
+}
+
 
 export async function Login(Email, Senha) {
     let sql = `     SELECT   ID_USUARIO           AS      Id,
@@ -97,13 +109,10 @@ export async function Delete(id) {
 
 
 export async function AlterImage(imagem, id) {
-    console.log(1);
     const sql = `  UPDATE IMAGES_USER 
                 SET DS_IMG_PERFIL = ?
                     WHERE ID_IMG  = ?`;
-    console.log(2);
     const [res] = await config.query(sql, [imagem, id]);
-    console.log(3);
 
     return res.affectedRows;
 }
