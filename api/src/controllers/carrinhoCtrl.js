@@ -23,7 +23,7 @@ server.post('/carrinho', async (req, resp) => {
 
         const resposta = await InserirProdutoNoCarrinho(info);
         resp.send(resposta);
-
+        
     }
 
     catch (err) {
