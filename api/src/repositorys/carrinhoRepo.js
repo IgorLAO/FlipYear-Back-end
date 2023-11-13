@@ -13,10 +13,9 @@ export async function ListarCarrinho(id){
     let [resp] = await config.query(comando, [id]);
     return resp;
 
-}
+} 
 
 export async function InserirProdutoNoCarrinho(info){
-
 
     let comando =
     `INSERT INTO CARRINHO_TB (ID_USUARIO, ID_PRODUTO, QTD_PRODUTO_CARRINHO)

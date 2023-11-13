@@ -24,7 +24,6 @@ export async function ListPedidoInterval(Start, End) {
                         ID_USUARIO		AS IdUser,
                         ID_ENDERECO		AS IdEndereco,
                         ID_FORMA_PAG	AS FormaPag,
-                        NM_CATEGORIA    AS Categoria,
                         NM_PEDIDO       AS Pedido,
                         DS_NOTA_FISCAL  AS Nota,
                         QTD_PARCELAS    AS PARCELAS,
