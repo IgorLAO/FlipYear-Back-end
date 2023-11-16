@@ -2,6 +2,7 @@ import config from "./db_connection.js";
 
 export async function ListComments(qtd, offset){
     const sql = `select US_TB.ID_USUARIO 							AS ID,
+    ID_PRODUTO                          AS PRODUTO,
     NM_USUARIO 							AS NOME,
     DS_COMENTARIO 						AS COMENTARIO,
     DT_COMENTARIO						AS PUBLICACAO,
