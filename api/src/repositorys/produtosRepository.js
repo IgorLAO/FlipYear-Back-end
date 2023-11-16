@@ -48,12 +48,12 @@ export async function InsertProdutos(produto) {
 
 
 export async function RemoverProdutos(id) {
-    const comando = `
+    const sql = `
     
     DELETE FROM PRODUTO_TB
         WHERE ID_PRODUTO = ? `
 
-    const [resp] = await config.query(comando, [id]);
+    const [resp] = await config.query(sql, [id]);
     return resp.affectedRows;
 }
 
@@ -84,18 +84,18 @@ export async function SearchProd(search) {
 export async function ConsultarProdPorId(id) {
 
 
-    let comando = `
+    let sql = `
     SELECT * FROM PRODUTO_TB
                 WHERE ID_PRODUTO = ?
     `
 
-    const [resp] = await config.query(comando, [id])
+    const [resp] = await config.query(sql, [id])
     return resp;
 
 }
 
 export async function AlterarProduto(id, produto) {
-    const comando = `
+    const sql = `
             UPDATE PRODUTO_TB
             SET 	NM_PRODUTO					=?,
                     VL_PRECO					=?,
@@ -107,7 +107,7 @@ export async function AlterarProduto(id, produto) {
                     DS_DETALHES					=?
             WHERE ID_PRODUTO				=? `
 
-    const [resp] = await config.query(comando, [
+    const [resp] = await config.query(sql, [
         produto.nome,
         produto.preco,
         produto.precoPromocao,
@@ -150,25 +150,30 @@ export async function ListAllDestProd(qtd, offset) {
 }
 
 export async function FiltroFoda(filtro) {
-    const comando = `SELECT * FROM PRODUTO_TB
+    const sql = `SELECT * FROM PRODUTO_TB
                     WHERE`
 };
 
 export async function AlterarImagem(imagem, id) {
-    const comando = `
+    const sql = `
         update IMAGEM_PRODUTO_TB
             SET IMG_PRODUTO = ?
                 WHERE ID_PRODUTO = ?`
 
-    const [resp] = await config.query(comando, [imagem, id]);
+    const [resp] = await config.query(sql, [imagem, id]);
     return resp.affectedRows;
 }
 
-export async function InserirImagem(){
-    const comando = `
-        insert into IMAGEM_PRODUTO_TB(ID_PRODUTO, IMG_PRODUTO)
-            VALUES(?,?)
-    `
-    const [resp] = await config.query(comando, [id, imagem]);
-    return resp[0];
+export async function InserirImagem(Frente,
+    Tras,
+    LadoDirei,
+    LadoEsq
+    ){
+    const sql = `insert into PRODUTO_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
+                                     VALUES (?,?,?,?)`;
+    
+    const [resp] = await config.query(sql, [Frente, Tras, LadoDirei, LadoEsq]);
+
+
+    return resp;
 }
