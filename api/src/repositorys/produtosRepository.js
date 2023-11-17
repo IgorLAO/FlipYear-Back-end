@@ -20,14 +20,22 @@ export async function ListAllProd() {
     return resp;
 }
 
+export async function GetCatego() {
+    const sql = `SELECT *
+                    FROM CATEGORIA_TB`
+
+    const [resp] = await config.query(sql);
+    return resp
+}
+
 export async function InsertProdutos(produto) {
     const resp = `
-
-    INSERT INTO PRODUTO_TB  (ID_CATEGORIA,  NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_DESTAQUE, BT_PROMOCAO, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
-       VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) `
+    INSERT INTO PRODUTO_TB (ID_CATEGORIA, ID_IMGS, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); `
 
     const [linhas] = await config.query(resp, [
-        produto.categoria,
+        produto.Idcategoria,
+        produto.IdImg,
         produto.nome,
         produto.preco,
         produto.precoPromocao,
@@ -41,16 +49,12 @@ export async function InsertProdutos(produto) {
         produto.estado,
         produto.colecionador
     ]);
-
-    produto.id = linhas.insertId
-    return resp[0];
+    return linhas;
 }
 
 
 export async function RemoverProdutos(id) {
-    const sql = `
-    
-    DELETE FROM PRODUTO_TB
+    const sql = `DELETE FROM PRODUTO_TB
         WHERE ID_PRODUTO = ? `
 
     const [resp] = await config.query(sql, [id]);
@@ -168,10 +172,10 @@ export async function InserirImagem(Frente,
     Tras,
     LadoDirei,
     LadoEsq
-    ){
+) {
     const sql = `insert into PRODUTO_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
                                      VALUES (?,?,?,?)`;
-    
+
     const [resp] = await config.query(sql, [Frente, Tras, LadoDirei, LadoEsq]);
 
 

@@ -9,7 +9,8 @@ import {
     ListAllProd,
     ListAllDestProd,
     AlterarImagem,
-    InserirImagem
+    InserirImagem,
+    GetCatego
 } from "../repositorys/produtosRepository.js";
 
 import { Router } from "express";
@@ -75,28 +76,44 @@ server.get('/produtos/:id', async (req, resp) => {
 
     }
 })
-
+server.get('/categoria', async (req, resp) => {
+    try {
+        const data = await GetCatego();
+        resp.json(data); // Envia os dados de volta ao cliente
+    } catch (error) {
+        resp.status(500).json({ error: 'Erro ao buscar categorias' });
+    }
+});
 
 //inserir produto
 server.post('/produtos', async (req, resp) => {
     try {
         const produtos = req.body
-        if (!produtos.nome) {
-            throw new Error("Informe o nome")
-        }
-        if (!produtos.preco) {
-            throw new Error("Informe o Valor")
-        }
-        if (!produtos.estoque) {
-            throw new Error("Informe o estoque")
-        }
-        if (!produtos.disponivel) {
-            throw new Error("Informe se o produto está disponível");
 
-        }
-        if (!produtos.destaque) {
-            throw new Error("Informe se é destaque")
-        }
+        if (!produtos.nome) 
+            throw new Error("Informe o nome");
+        
+        if (!produtos.preco) 
+            throw new Error("Informe o Valor");
+        
+        if (!produtos.estoque) 
+            throw new Error("Informe o estoque");
+        
+        if (!produtos.disponivel) 
+            throw new Error("Informe se o produto está disponível");
+        
+        if (!produtos.destaque) 
+            throw new Error("Informe se é destaque");
+        
+        if (!produtos.disponivel) 
+            throw new Error("Informe se esta disponivel");
+        
+        if (!produtos.estado) 
+            throw new Error("Informe o estado");
+        
+        if (!produtos.colecionador) 
+            throw new Error("Informe se conlecionador");
+        
 
         const resposta = await InsertProdutos(produtos);
         resp.send(resposta);
