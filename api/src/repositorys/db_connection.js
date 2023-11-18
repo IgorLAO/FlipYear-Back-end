@@ -14,5 +14,6 @@ const config = await mysql.createConnection({
     }
 });
 
-console.log('DB!')
+console.log('DB!');
+
 export default config
