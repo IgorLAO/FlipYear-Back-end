@@ -9,6 +9,7 @@ server.get('/carrinho/:id', async (req, resp) => {
         let data = await ListarCarrinho(id);
         resp.send(data);
 
+        
     }
 
     catch (err) {
