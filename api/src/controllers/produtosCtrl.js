@@ -30,19 +30,11 @@ server.get('/produtos', async (req, resp) => {
         const getData = await ListProd(qtd, offset);
         if (getData.length <= 0)
             throw new Error('Não encontrado')
+
         resp.send(getData);
 
-        /*
-            {
-                qtd: 4,
-                pag: 1,
-                total: 7,
-                resultad: [{},{}]
-            }
-        */
-
     } catch (err) {
-        resp.status(404).send({ erro: err.message })
+            resp.status(404).send({ erro: err.message })
     }
 });
 
@@ -58,6 +50,7 @@ server.get('/outrosprodutos', async (req, resp) => {
         resp.send(getData);
     } catch (err) {
         resp.status(404).send({ erro: err.message })
+        
     }
 });
 
@@ -79,7 +72,7 @@ server.get('/produtos/:id', async (req, resp) => {
 server.get('/categoria', async (req, resp) => {
     try {
         const data = await GetCatego();
-        resp.json(data); // Envia os dados de volta ao cliente
+        resp.json(data);
     } catch (error) {
         resp.status(500).json({ error: 'Erro ao buscar categorias' });
     }
@@ -173,12 +166,10 @@ server.delete('/produtos/:id', async (req, resp) => {
     try {
         const { id } = req.params;
 
-        const produto = await RemoverProdutos(id);
+        const res = await RemoverProdutos(id);
 
-        if (produto != 1)
-            throw new Error("Produto não pode ser removido")
 
-        resp.send(204)
+        resp.status(204).send()
     } catch (err) {
         resp.status(400).send({
             erro: err.message
