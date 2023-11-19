@@ -1,6 +1,6 @@
 import multer from "multer";
 import { Router } from "express";
-import { AlterImage, Delete, GetImages, GetUserById, InsertClientes, Login, SearchUser, getUsers } from "../repositorys/usuariosRepo.js";
+import { AlterImage, Delete, GetImages, GetUserById, InsertClientes, InsertImage, Login, SearchUser, getUsers } from "../repositorys/usuariosRepo.js";
 import { getADM } from "../repositorys/ADM.js";
 
 
@@ -19,7 +19,9 @@ server.get('/usuarios', async (req, resp) => {
 
 server.get('/usuario/:id', async (req, resp) => {
     try {
+        console.log(1)
         const { id } = req.params;
+        console.log(2)
         let r = await GetUserById(id);
 
         resp.send(r)
@@ -100,6 +102,32 @@ server.put('/usuario/:id/ProfImage', upload.single('profile'), async (req, resp)
         resp.send(data);
     } catch (err) {
         resp.send({ erro: err.message });
+    }
+});
+
+server.post('/usuario/ProfImage', upload.single('profile'), async (req, resp) => {
+    try {
+
+        const imagem = req.file.path;
+        console.log(imagem)
+        const data = await InsertImage(imagem);
+
+        resp.status(200).send();
+    } catch (err) {
+        resp.status(500).send({ erro: err.message });
+    }
+});
+
+server.post('/usuario/ProfImageFake', async (req, resp) => {
+    try {
+
+        const imagem = req.body;
+        console.log(imagem)
+        const data = await InsertImage(imagem);
+
+        resp.status(200).send();
+    } catch (err) {
+        resp.status(500).send({ erro: err.message });
     }
 });
 

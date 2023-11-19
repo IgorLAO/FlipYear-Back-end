@@ -116,3 +116,10 @@ export async function AlterImage(imagem, id) {
 
     return res.affectedRows;
 }
+export async function InsertImage(imagem) {
+    const sql = `  INSERT INTO IMAGES_USER (DS_IMG_PERFIL)
+                                           VALUES(?)`;
+    const [res] = await config.query(sql, [imagem]);
+
+    return res.affectedRows;
+}
