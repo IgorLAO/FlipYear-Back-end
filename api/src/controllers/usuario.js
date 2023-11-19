@@ -1,6 +1,17 @@
 import multer from "multer";
 import { Router } from "express";
-import { AlterImage, Delete, GetImages, GetUserById, InsertClientes, InsertImage, Login, SearchUser, getUsers } from "../repositorys/usuariosRepo.js";
+import {
+    Login,
+    Delete,
+    getUsers,
+    GetImages,
+    SearchUser,
+    AlterImage,
+    GetUserById,
+    InsertClientes,
+    InsertImgProfile,
+} from "../repositorys/usuariosRepo.js";
+
 import { getADM } from "../repositorys/ADM.js";
 
 
@@ -16,6 +27,7 @@ server.get('/usuarios', async (req, resp) => {
         resp.send(err.message)
     }
 });
+
 
 server.get('/usuario/:id', async (req, resp) => {
     try {
@@ -118,17 +130,12 @@ server.post('/usuario/ProfImage', upload.single('profile'), async (req, resp) =>
     }
 });
 
-server.post('/usuario/ProfImageFake', async (req, resp) => {
-    try {
 
-        const imagem = req.body;
-        console.log(imagem)
-        const data = await InsertImage(imagem);
-
-        resp.status(200).send();
-    } catch (err) {
-        resp.status(500).send({ erro: err.message });
-    }
+server.post('/imgs', async (req, resp) => {
+    const img =  req.body.img;
+    console.log(img)
+    const data = await InsertImgProfile(img);
+    resp.status(200).send(data);
 });
 
 server.get('/images', async (req, resp) => {
