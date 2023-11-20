@@ -200,10 +200,10 @@ server.get('/produtosDestaque', async (req, resp) => {
 
 //inserir imagem 
 server.post('/produtos/imagem', upload.fields([
-    { name: 'Frente', maxCount: 1 },
-    { name: 'LadoEsq', maxCount: 1 },
-    { name: 'LadoDir', maxCount: 1 },
-    { name: 'Tras', maxCount: 1 },
+                                                { name: 'Frente', maxCount: 1 },
+                                                { name: 'LadoEsq', maxCount: 1 },
+                                                { name: 'LadoDir', maxCount: 1 },
+                                                { name: 'Tras', maxCount: 1 },
   ]), async (req, res) => {
     try {
       const Frente = req.files['Frente'][0].path;
