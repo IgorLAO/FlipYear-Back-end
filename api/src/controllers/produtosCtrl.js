@@ -17,7 +17,7 @@ import { Router } from "express";
 import multer from 'multer';
 
 let server = Router();
-const upload = multer({ dest: 'storage/produtos' });
+const upload = multer({ dest: 'storage/images/produtos' });
 
 
 //LISTAR
@@ -199,7 +199,7 @@ server.get('/produtosDestaque', async (req, resp) => {
 
 
 //inserir imagem 
-server.post('/produtos/imagem', upload.fields([
+server.post('/imagem/produto', upload.fields([
                                                 { name: 'Frente', maxCount: 1 },
                                                 { name: 'LadoEsq', maxCount: 1 },
                                                 { name: 'LadoDir', maxCount: 1 },
@@ -221,6 +221,7 @@ server.post('/produtos/imagem', upload.fields([
       });
     }
   });
+
 //Alterar imagem produto
 server.put('/produtos/:id/imagem', upload.single('CapaProduto'), async (req, resp) => {
     try {
