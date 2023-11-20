@@ -172,13 +172,13 @@ export async function AlterarImagem(imagem, id) {
 
 export async function InserirImagem(Frente,
     Tras,
-    LadoDirei,
+    LadoDir,
     LadoEsq
 ) {
     const sql = `insert into PRODUTO_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
                                      VALUES (?,?,?,?)`;
 
-    const [resp] = await config.query(sql, [Frente, Tras, LadoDirei, LadoEsq]);
+    const [resp] = await config.query(sql, [Frente, Tras, LadoDir, LadoEsq]);
 
 
     return resp;

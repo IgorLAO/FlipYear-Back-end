@@ -206,14 +206,12 @@ server.post('/produtos/imagem', upload.fields([ { name: 'Frente', maxCount: 1 },
 ]), async (req, resp) => {
         try {
             const Frente = req.files['Frente'][0].path;
-            const LadoDirei = req.files['LadoDir'][0].path;
+            const LadoDir = req.files['LadoDir'][0].path;
             const LadoEsq = req.files['LadoEsq'][0].path;
             const Tras = req.files['Tras'][0].path;
             
-            console.log(Frente)
-
             const data = await InserirImagem( Frente,
-                                                LadoDirei,
+                                                LadoDir,
                                                 LadoEsq,
                                                 Tras,);
 
