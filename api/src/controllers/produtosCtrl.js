@@ -199,33 +199,28 @@ server.get('/produtosDestaque', async (req, resp) => {
 
 
 //inserir imagem 
-server.post('/produtos/imagem', upload.fields([ { name: 'Frente', maxCount: 1 },
-                                                { name: 'LadoEsq', maxCount: 1 },
-                                                { name: 'LadoDir', maxCount: 1 },
-                                                { name: 'Tras', maxCount: 1 },
-]), async (req, resp) => {
-        try {
-            const Frente = req.files['Frente'][0].path;
-            const LadoDir = req.files['LadoDir'][0].path;
-            const LadoEsq = req.files['LadoEsq'][0].path;
-            const Tras = req.files['Tras'][0].path;
-            
-            const data = await InserirImagem( Frente,
-                                                LadoDir,
-                                                LadoEsq,
-                                                Tras,);
-
-
-            resp.status(200).send(data);
-
-        } catch (err) {
-            resp.status(400).send({
-                erro: err.message
-            })
-        }
-    })
-
-
+server.post('/produtos/imagem', upload.fields([
+    { name: 'Frente', maxCount: 1 },
+    { name: 'LadoEsq', maxCount: 1 },
+    { name: 'LadoDir', maxCount: 1 },
+    { name: 'Tras', maxCount: 1 },
+  ]), async (req, res) => {
+    try {
+      const Frente = req.files['Frente'][0].path;
+      const LadoDir = req.files['LadoDir'][0].path;
+      const LadoEsq = req.files['LadoEsq'][0].path;
+      const Tras = req.files['Tras'][0].path;
+      
+   
+      const data = await InserirImagem(Frente, LadoDir, LadoEsq, Tras);
+  
+      res.status(200).send(data);
+    } catch (err) {
+      res.status(400).send({
+        error: err.message
+      });
+    }
+  });
 //Alterar imagem produto
 server.put('/produtos/:id/imagem', upload.single('CapaProduto'), async (req, resp) => {
     try {
