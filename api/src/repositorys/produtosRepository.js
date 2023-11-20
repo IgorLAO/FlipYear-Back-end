@@ -111,7 +111,7 @@ export async function AlterarProduto(id, produto) {
                     BT_DISPONIVEL				=?,
                     QTD_ESTOQUE					=?,
                     DS_DETALHES					=?
-            WHERE ID_PRODUTO				=? `
+            WHERE ID_PRODUTO				    =? `
 
     const [resp] = await config.query(sql, [
         produto.nome,
