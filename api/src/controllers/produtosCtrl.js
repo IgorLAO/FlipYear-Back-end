@@ -206,7 +206,7 @@ server.post('/imagem/produto', upload.fields([
     // { name: 'Tras', maxCount: 1 },
 ]), async (req, res) => {
     try {
-        const Frente = req.files['Frente'][0].path;
+        const Frente = req.files['Frente'].path;
         // const LadoDir = req.files['LadoDir'][0].path;
         // const LadoEsq = req.files['LadoEsq'][0].path;
         // const Tras = req.files['Tras'][0].path;
