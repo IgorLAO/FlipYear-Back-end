@@ -2,8 +2,10 @@ import config from './db_connection.js';
 
 export async function ListProd(qtd, offset) {
     const sql = `SELECT	*
-                  FROM PRODUTO_TB 		    AS P 
-            INNER JOIN CATEGORIA_TB		    AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+                  FROM PRODUTO_TB 		AS P 
+            INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+            INNER JOIN PRODUTO_IMG_TB   AS P_IMG
+                                             ON P.ID_PROD_IMG = P_IMG.ID_PROD_IMG
                  ORDER BY nm_produto
                  LIMIT ?
                 OFFSET ? `;
@@ -129,7 +131,7 @@ export async function AlterarProduto(id, produto) {
 export async function ListDestProd(qtd, offset) {
     const sql = `			SELECT *
     FROM PRODUTO_TB 		AS P 
-    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+    INNER JOIN CATEGORIA_TB	 C ON C.ID_CATEGORIA = P.ID_CATEGORIA
     where bt_destaque = true
     order by nm_produto
     limit ?
