@@ -45,3 +45,11 @@ export async function UpdtPedido(situacao, id) {
     return resp
 
 }
+
+//PEDIDO ITEM
+
+export async function InserirPedidoItem(){
+    const resp = `
+            
+    `
+}
