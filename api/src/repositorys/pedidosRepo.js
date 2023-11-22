@@ -36,14 +36,15 @@ export async function ListPedidoInterval(Start, End) {
     return resp
 }
 
-export async function UpdtPedido(situacao, id) {
-    const sql = `UPDATE PEDIDO_TB
-                    SET DS_SITUACAO = ?
-                 WHERE ID_PEDIDO    = ?`;
 
-    const [resp] = await config.query(sql, [ id, situacao]);
-    return resp
+export async function AlterarImagem(situacao, id) {
+    const sql = `
+        update PEDIDO_TB
+            SET DS_SITUACAO = ?
+                WHERE ID_PEDIDO = ?`
 
+    const [resp] = await config.query(sql, [situacao, id]);
+    return resp.affectedRows;
 }
 
 //PEDIDO ITEM
