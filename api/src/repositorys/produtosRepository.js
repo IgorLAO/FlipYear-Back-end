@@ -65,7 +65,22 @@ export async function RemoverProdutos(id) {
 
 
 export async function SearchProd(search) {
-    const sql = `  SELECT *
+    const sql = `  SELECT   ID_PRODUTO              AS Id
+                            NM_PRODUTO			 	AS Nome, 
+                            VL_PRECO			 	AS Preco, 
+                            VL_PRECO_PROMOCIONAL 	AS Promo, 
+                            BT_DESTAQUE				AS Destaque, 
+                            BT_PROMOCAO				AS IsPromo, 
+                            BT_DISPONIVEL			AS IsDisponivel, 
+                            QTD_ESTOQUE				AS Qtd_estq, 
+                            DS_DETALHES				AS Detalhes, 
+                            VL_AVALIACAO			AS Avaliacao,	 
+                            NM_FABRICANTE			AS Fabricante, 
+                            TP_ESTADO				AS Estado, 
+                            TP_COLECIONADOR			AS Colecionador,
+                            NM_CATEGORIA            AS Categoria,
+
+                            FROM PRODUTO_TB 		AS P 
                         INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
                         WHERE   NM_PRODUTO			 like ?  `
 
