@@ -17,6 +17,8 @@ export async function ListAllProd() {
     const sql = `SELECT	*
                     FROM PRODUTO_TB 		    AS P 
                 INNER JOIN CATEGORIA_TB		    AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+                INNER JOIN PRODUTO_IMG_TB   AS P_IMG
+                            ON P.ID_PROD_IMG = P_IMG.ID_PROD_IMG
                     ORDER BY nm_produto`
     const [resp] = await config.query(sql)
     return resp;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ListPedido, ListPedidoInterval, UpdtPedido } from "../repositorys/pedidosRepo.js";
+import { ListPedido, ListPedidoInterval, PedidoSituacao } from "../repositorys/pedidosRepo.js";
 
 const server = Router();
 
@@ -33,7 +33,7 @@ server.put('/pedidos/:id', async (req, resp) => {
 
         console.log(situacao);
 
-        let data = await UpdtPedido(situacao, insertId);
+        let data = await PedidoSituacao(situacao, insertId);
         console.log(data);
 
         resp.status(200).send(data);

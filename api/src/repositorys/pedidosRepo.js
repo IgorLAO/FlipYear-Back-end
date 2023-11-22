@@ -37,7 +37,7 @@ export async function ListPedidoInterval(Start, End) {
 }
 
 
-export async function AlterarImagem(situacao, id) {
+export async function PedidoSituacao(situacao, id) {
     const sql = `
         update PEDIDO_TB
             SET DS_SITUACAO = ?
