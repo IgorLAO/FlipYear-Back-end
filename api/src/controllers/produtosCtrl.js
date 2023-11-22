@@ -122,8 +122,10 @@ server.get('/produto/busca', async (req, resp) => {
     try {
         let busca = req.query.search
         let res = await SearchProd(busca);
+
         if (res.length <= 0)
             throw new Error("nao encontrado");
+
         resp.send(res);
     } catch (err) {
         resp.status(400).send({
@@ -203,7 +205,7 @@ server.post('/imagem/produto', upload.fields([
     { name: 'Frente', maxCount: 1 },
     { name: 'LadoEsq', maxCount: 1 },
     { name: 'LadoDir', maxCount: 1 },
-     { name: 'Tras', maxCount: 1 },
+    { name: 'Tras', maxCount: 1 },
 ]), async (req, res) => {
     try {
         const Frente = req.files['Frente'][0].path;
