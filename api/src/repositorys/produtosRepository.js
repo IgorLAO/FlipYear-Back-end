@@ -2,8 +2,10 @@ import config from './db_connection.js';
 
 export async function ListProd(qtd, offset) {
     const sql = `SELECT	*
-                  FROM PRODUTO_TB 		    AS P 
-            INNER JOIN CATEGORIA_TB		    AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+                  FROM PRODUTO_TB 		AS P 
+            INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+            INNER JOIN PRODUTO_IMG_TB   AS P_IMG
+                                             ON P.ID_PROD_IMG = P_IMG.ID_PROD_IMG
                  ORDER BY nm_produto
                  LIMIT ?
                 OFFSET ? `;
@@ -30,7 +32,7 @@ export async function GetCatego() {
 
 export async function InsertProdutos(produto) {
     const resp = `
-    INSERT INTO PRODUTO_TB (ID_CATEGORIA, ID_IMGS, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
+    INSERT INTO PRODUTO_TB (ID_CATEGORIA, ID_PROD_IMG, NM_PRODUTO, VL_PRECO, VL_PRECO_PROMOCIONAL, BT_PROMOCAO, BT_DESTAQUE, BT_DISPONIVEL, QTD_ESTOQUE, DS_DETALHES, VL_AVALIACAO, NM_FABRICANTE, TP_ESTADO, TP_COLECIONADOR)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); `
 
     const [linhas] = await config.query(resp, [
@@ -97,7 +99,7 @@ export async function AlterarProduto(id, produto) {
                     BT_DISPONIVEL				=?,
                     QTD_ESTOQUE					=?,
                     DS_DETALHES					=?
-            WHERE ID_PRODUTO				=? `
+            WHERE ID_PRODUTO				    =? `
 
     const [resp] = await config.query(sql, [
         produto.nome,
@@ -117,7 +119,7 @@ export async function AlterarProduto(id, produto) {
 export async function ListDestProd(qtd, offset) {
     const sql = `			SELECT *
     FROM PRODUTO_TB 		AS P 
-    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+    INNER JOIN CATEGORIA_TB	 C ON C.ID_CATEGORIA = P.ID_CATEGORIA
     where bt_destaque = true
     order by nm_produto
     limit ?
@@ -158,13 +160,13 @@ export async function AlterarImagem(imagem, id) {
 
 export async function InserirImagem(Frente,
     Tras,
-    LadoDirei,
+    LadoDir,
     LadoEsq
 ) {
     const sql = `insert into PRODUTO_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
                                      VALUES (?,?,?,?)`;
 
-    const [resp] = await config.query(sql, [Frente, Tras, LadoDirei, LadoEsq]);
+    const [resp] = await config.query(sql, [Frente, Tras, LadoDir, LadoEsq]);
 
 
     return resp;
