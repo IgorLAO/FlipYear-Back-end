@@ -41,7 +41,7 @@ export async function UpdtPedido(situacao, id) {
                     SET DS_SITUACAO = ?
                  WHERE ID_PEDIDO    = ?`;
 
-    let [resp] = await config.query(sql, [situacao, id]);
+    const [resp] = await config.query(sql, [ id, situacao]);
     return resp
 
 }
