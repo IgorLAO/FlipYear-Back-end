@@ -6,7 +6,8 @@ export async function ListComments(qtd, offset){
     NM_USUARIO 							AS NOME,
     DS_COMENTARIO 						AS COMENTARIO,
     DT_COMENTARIO						AS PUBLICACAO,
-    QTD_LIKES							AS LIKES
+    QTD_LIKES							AS LIKES,
+    BT_DENUNCIA                         AS DENUNCIA
 FROM COMENTARIOS_TB 						AS C_TB
 INNER JOIN USERS_TB AS US_TB
                  ON US_TB.ID_USUARIO = C_TB.ID_USUARIO
@@ -24,5 +25,18 @@ export async function DeleteComment(id){
 
     const [resp] = await config.query(sql, [id])
     return resp.affectedRows;
+}
+
+export async function InsertComment(C){
+    const sql = `INSERT INTO COMENTARIOS_TB (ID_USUARIO, ID_PRODUTO,  DS_COMENTARIO, DT_COMENTARIO, QTD_LIKES, BT_DENUNCIA)
+    VALUES (?, ?, ?, ?, ?, ?); `
+
+    const [resp] = await config.query(sql,[C.idUsuario,
+                                           C.idProduto,
+                                           C.comentario,
+                                           C.data,
+                                           C.likes,
+                                           C.denuncia])
+    return resp;
 }
 

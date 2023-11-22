@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ListComments, DeleteComment } from "../repositorys/comentariosRepo.js";
+import { ListComments, DeleteComment, InsertComment } from "../repositorys/comentariosRepo.js";
 
 let server = Router()
 
@@ -48,6 +48,19 @@ server.delete('/comentarios/:id', async (req, resp) =>{
             throw new Error('Comentário não pôde ser deletado.')
 
         resp.send(204)
+    } catch (err) {
+        resp.status(400).send({
+            erro:err.message
+        })
+    }
+})
+
+server.post('/comentarios', async (req, resp) =>{
+    try {
+        let bodyreq = req.body
+        let data = await InsertComment(bodyreq)
+
+        resp.send(data)
     } catch (err) {
         resp.status(400).send({
             erro:err.message

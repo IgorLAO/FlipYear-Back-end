@@ -1,6 +1,6 @@
 import mysql from "mysql2/promise";
 
-let config = await mysql.createConnection({
+const config = await mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PWD,
@@ -14,5 +14,6 @@ let config = await mysql.createConnection({
     }
 });
 
-console.log('DB!')
+console.log('DB!');
+
 export default config
