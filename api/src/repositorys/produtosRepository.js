@@ -78,8 +78,7 @@ export async function SearchProd(search) {
                             NM_FABRICANTE			AS Fabricante, 
                             TP_ESTADO				AS Estado, 
                             TP_COLECIONADOR			AS Colecionador,
-                            NM_CATEGORIA            AS Categoria,
-
+                            NM_CATEGORIA            AS Categoria
                             FROM PRODUTO_TB 		AS P 
                         INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
                         WHERE   NM_PRODUTO			 like ?  `
