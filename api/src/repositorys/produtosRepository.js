@@ -65,7 +65,7 @@ export async function RemoverProdutos(id) {
 
 
 export async function SearchProd(search) {
-    const sql = `  SELECT   ID_PRODUTO              AS Id
+    const sql = `  SELECT   ID_PRODUTO              AS Id,
                             NM_PRODUTO			 	AS Nome, 
                             VL_PRECO			 	AS Preco, 
                             VL_PRECO_PROMOCIONAL 	AS Promo, 
