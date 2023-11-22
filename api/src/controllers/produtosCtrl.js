@@ -27,7 +27,7 @@ server.get('/produtos', async (req, resp) => {
         const pag = req.query.pagina || 1;
         const offset = (pag - 1) * qtd;
 
-        const getData = await ListAllProd();
+        const getData = await ListProd(qtd, offset);
         if (getData.length <= 0)
             throw new Error('Não encontrado')
 
@@ -258,11 +258,11 @@ server.get('/produtosAllDestaque', async (req, resp) => {
 })
 
 //Listar todos os produtos
-server.get('/produtos', async (req, resp) => {
+server.get('/Allprodutos', async (req, resp) => {
     try {
         const getData = await ListAllProd()
-        if (getData.length <= 0)
-            throw new Error('Produto não encontrado.')
+
+
         resp.send(getData);
     } catch (err) {
         resp.status(400).send({
