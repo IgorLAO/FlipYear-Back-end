@@ -118,7 +118,7 @@ server.post('/produtos', async (req, resp) => {
 });
 
 //Busca
-server.get('/produtos/busca', async (req, resp) => {
+server.get('/produto/busca', async (req, resp) => {
     try {
         let busca = req.query.search
         let res = await SearchProd(busca);
