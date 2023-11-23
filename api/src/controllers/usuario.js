@@ -104,11 +104,14 @@ server.post('/usuarios/login', async (req, resp) => {
 });
 
 server.put('/imagem/usuario/:id', upload.single('user'), async (req, resp) => {
-    const { id } = req.params.id
+    const { id } = req.params
     const img = req.file.path;
 
-    await AlterImage(img, id)
-    resp.sendStatus(200)
+    let i = await AlterImage(img, id)
+    
+    console.log(img)
+
+    resp.sendStatus(200).send(i)
 });
 
 

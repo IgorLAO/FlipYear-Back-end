@@ -114,6 +114,8 @@ export async function AlterImage(imagem, id) {
                     WHERE ID_IMG  = ?`;
     const [res] = await config.query(sql, [imagem, id]);
 
+    console.log(res)
+
     return res.affectedRows;
 }
 
