@@ -111,28 +111,24 @@ server.put('/usuario/:id/ProfImage', upload.single('profile'), async (req, resp)
         console.log(imagem)
 
         const data = await AlterImage(imagem, id);
-        resp.send(data);
+        resp.status(200).send(data);
     } catch (err) {
         resp.send({ erro: err.message });
     }
 });
 
 server.post('/usuario/ProfImage', upload.single('profile'), async (req, resp) => {
-    try {
+    const imagem = req.file.path;
+    console.log(imagem);
+    const data = await InsertImage(imagem);
 
-        const imagem = req.file.path;
-        console.log(imagem)
-        const data = await InsertImage(imagem);
-
-        resp.status(200).send();
-    } catch (err) {
-        resp.status(500).send({ erro: err.message });
-    }
+    console.log(data);
+    resp.sendStatus(Status);
 });
 
 
 server.post('/imgs', async (req, resp) => {
-    const img =  req.body.img;
+    const img = req.body.img;
     console.log(img)
     const data = await InsertImgProfile(img);
     resp.status(200).send(data);
