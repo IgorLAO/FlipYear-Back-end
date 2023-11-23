@@ -29,11 +29,10 @@ server.get('/pedidosInterval', async (req, resp) => {
 server.put('/pedidos/:id', async (req, resp) => {
     try {
         let insertId = req.params.id;
-        let situacao = req.body;
+        let DS_SITUACAO = String(req.body);
+     await PedidoSituacao({DS_SITUACAO}, Number(insertId));
 
-     await PedidoSituacao(String(situacao), Number(insertId));
-
-        resp.sendStatus(200);
+     resp.send(DS_SITUACAO);
 
     } catch (err) {
         resp.status(502).send({ error: err.message });
