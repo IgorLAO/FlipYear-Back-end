@@ -18,21 +18,14 @@ export async function getUsers() {
 };
 
 export async function GetUserById(id) {
-    let sql = `                               
-            SELECT  ID_USUARIO        AS      Id,
-                    NM_USUARIO        AS      Nome,
-                    DS_EMAIL          AS      Email,
-                    DS_TELEFONE       AS      Telefone,
-                    DS_CPF            AS      CPF,
-                    NM_CIDADE         AS      Nome_Cidade,
-                    NM_RUA            AS      Nome_Rua,
-                    NR_NUMERO         AS      Numero,
-                    DS_IMG_PERFIL	  AS      ImageProfile
-		FROM USERS_TB 				  AS U_TB
-        INNER JOIN IMAGES_USER AS IMG_TB
-									  ON  U_TB.ID_IMG = IMG_TB.ID_IMG
-		INNER JOIN ENDERECO_TB 		  AS E_TB 
-									  ON E_TB.ID_ENDERECO= U_TB.ID_ENDERECO
+    let sql = `SELECT U.ID_USUARIO AS UserID,
+                U.NM_USUARIO AS UserName,
+                U.DS_TELEFONE AS UserPhone,
+                U.DS_EMAIL AS UserEmail,
+                IU.ID_IMG AS ImageID,
+                IU.DS_IMG_PERFIL AS ImageProfile
+            FROM USERS_TB AS U
+            LEFT JOIN IMAGES_USER AS IU ON U.ID_IMG = IU.ID_IMG
 			WHERE ID_USUARIO = ?`;
 
     const [resp] = await config.query(sql, [id]);
@@ -43,14 +36,14 @@ export async function InsertClientes(C) {
     let sql = `INSERT INTO USERS_TB (ID_ENDERECO, ID_IMG, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_EMAIL,  DS_SENHA, DS_TIER)
                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    let [resp] = await config.query(sql, [ C.Id_endereco,
-                                           C.Id_img,
-                                           C.Nome,
-                                           C.Telefone,
-                                           C.CPF,
-                                           C.Email,
-                                           C.Senha,
-                                           C.Tier]);
+    let [resp] = await config.query(sql, [C.Id_endereco,
+    C.Id_img,
+    C.Nome,
+    C.Telefone,
+    C.CPF,
+    C.Email,
+    C.Senha,
+    C.Tier]);
 
     return resp
 };
@@ -92,10 +85,10 @@ export async function SearchUser(search) {
                 WHERE NM_USUARIO  LIKE ? 
                       OR DS_CPF   LIKE ?
                       OR DS_EMAIL LIKE ?`
-    let [resp] = await config.query(sql, [  '%' + search + '%',
-                                            '%' + search + '%',
-                                            '%' + search + '%']);
-                                            console.log(resp);
+    let [resp] = await config.query(sql, ['%' + search + '%',
+    '%' + search + '%',
+    '%' + search + '%']);
+    console.log(resp);
     return resp
 };
 
@@ -113,8 +106,6 @@ export async function AlterImage(imagem, id) {
                 SET DS_IMG_PERFIL = ?
                     WHERE ID_IMG  = ?`;
     const [res] = await config.query(sql, [imagem, id]);
-
-    console.log(res)
 
     return res.affectedRows;
 }

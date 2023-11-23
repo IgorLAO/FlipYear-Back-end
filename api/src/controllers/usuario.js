@@ -97,7 +97,7 @@ server.post('/usuarios/login', async (req, resp) => {
         if (!data)
             throw new Error("Credecias invalidas")
 
-        resp.send(data)
+        resp.send(data);
     } catch (err) {
         resp.status(401).send({ erro: err.message })
     }
@@ -111,7 +111,7 @@ server.put('/imagem/usuario/:id', upload.single('user'), async (req, resp) => {
     
     console.log(img)
 
-    resp.sendStatus(200).send(i)
+    resp.sendStatus(200)
 });
 
 
@@ -125,8 +125,6 @@ server.post('/usuario/ProfImage', upload.single('profile'), async (req, resp) =>
     console.log(data);
     resp.sendStatus(200).send(data);
 });
-
-
 
 server.post('/imgs', async (req, resp) => {
     const img = req.body.img;
