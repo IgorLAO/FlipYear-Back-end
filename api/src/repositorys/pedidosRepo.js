@@ -39,9 +39,9 @@ export async function ListPedidoInterval(Start, End) {
 
 export async function PedidoSituacao(situacao, id) {
     const sql = `
-        update PEDIDO_TB
-            SET DS_SITUACAO = ?
-                WHERE ID_PEDIDO = ?`
+            UPDATE PEDIDO_TB
+                SET DS_SITUACAO = ?
+            WHERE ID_PEDIDO    =  ?`
 
     const [resp] = await config.query(sql, [situacao, id]);
     return resp.affectedRows;

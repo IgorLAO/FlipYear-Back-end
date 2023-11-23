@@ -34,7 +34,6 @@ server.put('/pedidos/:id', async (req, resp) => {
         console.log(situacao);
 
         let data = await PedidoSituacao(situacao, insertId);
-        console.log(data);
 
         resp.status(200).send(data);
     } catch (err) {
