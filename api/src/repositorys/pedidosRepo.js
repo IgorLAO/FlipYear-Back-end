@@ -38,8 +38,7 @@ export async function ListPedidoInterval(Start, End) {
 
 
 export async function PedidoSituacao(situacao, id) {
-    const sql = `
-            UPDATE PEDIDO_TB
+    const sql = `UPDATE PEDIDO_TB
                 SET DS_SITUACAO = ?
             WHERE ID_PEDIDO    =  ?`
 
@@ -48,7 +47,6 @@ export async function PedidoSituacao(situacao, id) {
 }
 
 //PEDIDO ITEM
-
 export async function InserirPedidoItem(){
     const resp = `
             

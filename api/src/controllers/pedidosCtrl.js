@@ -31,11 +31,10 @@ server.put('/pedidos/:id', async (req, resp) => {
         let insertId = req.params.id;
         let situacao = req.body;
 
-        console.log(situacao);
+     await PedidoSituacao(String(situacao), Number(insertId));
 
-        let data = await PedidoSituacao(situacao, insertId);
+        resp.sendStatus(200);
 
-        resp.status(200).send(data);
     } catch (err) {
         resp.status(502).send({ error: err.message });
     }
