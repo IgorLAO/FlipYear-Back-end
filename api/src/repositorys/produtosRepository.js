@@ -15,9 +15,9 @@ export async function ListProd(qtd, offset) {
 
 export async function ListAllProd() {
     const sql = `SELECT	*
-                    FROM PRODUTO_TB 		    AS P 
-                INNER JOIN CATEGORIA_TB		    AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-                    ORDER BY nm_produto`
+    FROM PRODUTO_TB 		AS P 
+INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+   ORDER BY nm_produto`
     const [resp] = await config.query(sql)
     return resp;
 }
