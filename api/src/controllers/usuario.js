@@ -16,7 +16,7 @@ import { getADM } from "../repositorys/ADM.js";
 
 
 const server = Router();
-const upload = multer({ dest: 'storage/images/profileImages' });
+const upload = multer({ dest: 'storage/images/profile' });
 
 server.get('/usuarios', async (req, resp) => {
     try {
@@ -103,19 +103,16 @@ server.post('/usuarios/login', async (req, resp) => {
     }
 });
 
-server.put('/usuario/:id/ProfImage', upload.single('profile'), async (req, resp) => {
-    try {
-        const { id } = req.params;
+server.put('/imagem/usuario/:id', upload.single('user'), async (req, resp) => {
+    const { id } = req.params.id
+    const img = req.file.path;
 
-        const imagem = req.file.path;
-        console.log(imagem)
-
-        const data = await AlterImage(imagem, id);
-        resp.status(200).send(data);
-    } catch (err) {
-        resp.send({ erro: err.message });
-    }
+    await AlterImage(img, id)
+    resp.sendStatus(200)
 });
+
+
+// ------------------------------------------------------------------------------------
 
 server.post('/usuario/ProfImage', upload.single('profile'), async (req, resp) => {
     const imagem = req.file.path;
@@ -123,8 +120,9 @@ server.post('/usuario/ProfImage', upload.single('profile'), async (req, resp) =>
     const data = await InsertImage(imagem);
 
     console.log(data);
-    resp.sendStatus(Status);
+    resp.sendStatus(200).send(data);
 });
+
 
 
 server.post('/imgs', async (req, resp) => {
