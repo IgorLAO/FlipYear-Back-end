@@ -67,6 +67,7 @@ export async function RemoverProdutos(id) {
 
 export async function SearchProd(search) {
     const sql = `  SELECT   *
+                            FROM PRODUTO_TB 		AS P 
                         INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
                         WHERE   NM_PRODUTO			 like ?  `
 
