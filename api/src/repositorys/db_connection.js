@@ -1,4 +1,5 @@
-try {
+import mysql from "mysql2/promise";
+
     const config = await mysql.createConnection({
         host: process.env.MYSQL_HOST,
         user: process.env.MYSQL_USER,
@@ -12,12 +13,6 @@ try {
             }
         }
     });
-    
-    console.log('Conexão bem-sucedida ao banco de dados MySQL!');
-    
-} catch (error) {
-    console.error('Erro ao conectar ao banco de dados:', error);
-    throw error;
-}
-export default config;
   
+    console.log('DB!');
+    export default config;
