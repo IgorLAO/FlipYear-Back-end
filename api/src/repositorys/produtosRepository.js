@@ -14,10 +14,11 @@ export async function ListProd(qtd, offset) {
 }
 
 export async function ListAllProd() {
-    const sql = `SELECT	*
-    FROM PRODUTO_TB 		AS P 
-INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-   ORDER BY nm_produto`
+    const sql = `SELECT *
+    FROM PRODUTO_TB AS P
+        INNER JOIN CATEGORIA_TB AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+        INNER JOIN PROD_IMG_TB AS P_IMG ON P.ID_PROD_IMG = P_IMG.ID_PROD_IMG
+    ORDER BY P.nm_produto`
     const [resp] = await config.query(sql)
     return resp;
 }
@@ -131,11 +132,11 @@ export async function ListDestProd(qtd, offset) {
 
 
 export async function ListAllDestProd(qtd, offset) {
-    const sql = `			SELECT *
-    FROM PRODUTO_TB 		AS P 
-    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-    where bt_destaque = true
-    order by nm_produto`
+    const sql = `SELECT *
+                        FROM PRODUTO_TB 		AS P 
+                        INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+                        where bt_destaque = true
+                        order by nm_produto`
 
     const [resp] = await config.query(sql, [qtd, offset])
     return resp;
@@ -159,11 +160,11 @@ export async function AlterarImagem(imagem, id) {
 }
 
 export async function InserirImagem(Frente,
-    Tras,
-    LadoDir,
-    LadoEsq
+                                    Tras,
+                                    LadoDir,
+                                    LadoEsq,
 ) {
-    const sql = `insert into PRODUTO_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
+    const sql = `insert into PROD_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
                                      VALUES (?,?,?,?)`;
 
     const [resp] = await config.query(sql, [Frente, Tras, LadoDir, LadoEsq]);
