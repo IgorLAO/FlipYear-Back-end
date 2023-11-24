@@ -105,9 +105,10 @@ export async function AlterImage(imagem, id) {
     const sql = `  UPDATE IMAGES_USER 
                 SET DS_IMG_PERFIL = ?
                     WHERE ID_IMG  = ?`;
-    const [res] = await config.query(sql, [imagem, id]);
 
-    return res.affectedRows;
+    const [res] = await config.query(sql, [imagem, id]);
+    console.log(res)
+    return res;
 }
 
 

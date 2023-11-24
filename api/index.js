@@ -11,7 +11,9 @@ import pedidoCrtl from './src/controllers/pedidosCtrl.js';
 
 const server = express();
 
-server.use('/storage/images/profileImages', express.static('storage/images/profileImages'));
+server.use('/storage/images/profile', express.static('storage/images/profile'));
+server.use('/storage/images/produtos', express.static('storage/images/produtos'));
+
 server.use(cors());
 server.use(express.json());
    
