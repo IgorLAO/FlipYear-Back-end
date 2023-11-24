@@ -81,6 +81,7 @@ export async function ConsultarProdPorId(id) {
 
     let sql = `
     SELECT * FROM PRODUTO_TB
+            INNER JOIN PROD_IMG_TB AS P_IMG ON P.ID_PROD_IMG = P_IMG.ID_PROD_IMG
                 WHERE ID_PRODUTO = ?
     `
 
