@@ -66,20 +66,7 @@ export async function RemoverProdutos(id) {
 
 
 export async function SearchProd(search) {
-    const sql = `  SELECT   ID_PRODUTO              AS Id,
-                            NM_PRODUTO			 	AS Nome, 
-                            VL_PRECO			 	AS Preco, 
-                            VL_PRECO_PROMOCIONAL 	AS Promo, 
-                            BT_DESTAQUE				AS Destaque, 
-                            BT_PROMOCAO				AS IsPromo, 
-                            BT_DISPONIVEL			AS IsDisponivel, 
-                            QTD_ESTOQUE				AS Qtd_estq, 
-                            DS_DETALHES				AS Detalhes, 
-                            VL_AVALIACAO			AS Avaliacao,	 
-                            NM_FABRICANTE			AS Fabricante, 
-                            TP_ESTADO				AS Estado, 
-                            TP_COLECIONADOR			AS Colecionador,
-                            NM_CATEGORIA            AS Categoria
+    const sql = `  SELECT   *
                             FROM PRODUTO_TB 		AS P 
                         INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
                         WHERE   NM_PRODUTO			 like ?  `
@@ -93,7 +80,8 @@ export async function ConsultarProdPorId(id) {
 
 
     let sql = `
-    SELECT * FROM PRODUTO_TB
+    SELECT * FROM PRODUTO_TB    AS P
+            INNER JOIN PROD_IMG_TB AS P_IMG ON P.ID_PROD_IMG = P_IMG.ID_PROD_IMG
                 WHERE ID_PRODUTO = ?
     `
 
@@ -134,6 +122,7 @@ export async function ListDestProd(qtd, offset) {
     const sql = `			SELECT *
     FROM PRODUTO_TB 		AS P 
     INNER JOIN CATEGORIA_TB	 C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+    INNER JOIN PROD_IMG_TB AS P_IMG ON P.ID_PROD_IMG = P_IMG.ID_PROD_IMG
     where bt_destaque = true
     order by nm_produto
     limit ?
@@ -145,11 +134,11 @@ export async function ListDestProd(qtd, offset) {
 
 
 export async function ListAllDestProd(qtd, offset) {
-    const sql = `			SELECT *
-    FROM PRODUTO_TB 		AS P 
-    INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-    where bt_destaque = true
-    order by nm_produto`
+    const sql = `SELECT *
+                        FROM PRODUTO_TB 		AS P 
+                        INNER JOIN CATEGORIA_TB		AS C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+                        where bt_destaque = true
+                        order by nm_produto`
 
     const [resp] = await config.query(sql, [qtd, offset])
     return resp;
@@ -173,11 +162,11 @@ export async function AlterarImagem(imagem, id) {
 }
 
 export async function InserirImagem(Frente,
-    Tras,
-    LadoDir,
-    LadoEsq
+                                    Tras,
+                                    LadoDir,
+                                    LadoEsq,
 ) {
-    const sql = `insert into PRODUTO_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
+    const sql = `insert into PROD_IMG_TB (FRENTE, TRAS, LADO_DIRE, LADO_ESQ)
                                      VALUES (?,?,?,?)`;
 
     const [resp] = await config.query(sql, [Frente, Tras, LadoDir, LadoEsq]);
