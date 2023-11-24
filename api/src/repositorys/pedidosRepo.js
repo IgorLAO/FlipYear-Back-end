@@ -47,8 +47,31 @@ export async function PedidoSituacao(situacao, id) {
 }
 
 //PEDIDO ITEM
-export async function InserirPedidoItem(){
+export async function InserirPedidoItem(pedido){
     const resp = `
-            
+    INSERT INTO PEDIDO_TB (ID_USUARIO, ID_CATEGORIA, ID_ENDERECO, ID_FORMA_PAG, NM_PEDIDO, DS_NOTA_FISCAL, QTD_PARCELAS, DT_PEDIDO, DS_SITUACAO)
+    VALUES (?, ?, ?, ?, ?,?, ?, ?, ?) `
+
+    const [linhas] = await config.query(resp,[
+        pedido.User,
+        pedido.Idcategoria,
+        pedido.endereco,
+        pedido.pagamento,
+        pedido.pedido,
+        pedido.notaFiscal,
+        pedido.parcelas,
+        pedido.data,
+        pedido.situacao
+    ]);
+
+    return linhas
+}
+
+export async function FormaPag(pedido){
+    const resp = `
+    INSERT INTO FORMA_PAG (NM_FORMA_PAG)
+        VALUES(?);
     `
+    const [linhas] = await config.query(resp,[pedido.pagamento]);
+    return linhas;
 }
